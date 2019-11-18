@@ -28,7 +28,7 @@ router.post(
   '/',
   [
     check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Password is required').exists()
+    check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
     const validationErrors = validationResult(req);
@@ -38,7 +38,7 @@ router.post(
     const { email, password } = req.body;
 
     try {
-      let user = await User.findOne({ email });
+      const user = await User.findOne({ email });
       if (!user) {
         return res.status(400).json({ msg: 'Invalid Values' });
       }
@@ -48,9 +48,8 @@ router.post(
         return res.status(400).json({ msg: 'Authentication Error' });
       }
 
-
       jwt.sign(
-        {user: { id: user.id } },
+        { user: { id: user.id } },
         config.get('jwtSecret'),
         { expiresIn: 60 * 60 * 60 },
         (err, token) => {
@@ -59,7 +58,7 @@ router.post(
           }
           res.json({ token });
         }
-        );
+      );
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server error, Status 500');

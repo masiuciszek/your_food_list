@@ -23,6 +23,7 @@ const dishSchema = Schema({
   type: {
     type: String,
     enum: ['breakfast', 'snack', 'main', 'dessert'],
+    default: 'main',
   },
   date: {
     type: Date,
