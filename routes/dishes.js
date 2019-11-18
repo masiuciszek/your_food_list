@@ -2,6 +2,8 @@ const express = require('express');
 
 const router = express.Router();
 const { check, validationResult } = require('express-validator/check');
+
+const multer = require('multer');
 const Dish = require('../models/Dish');
 const authMiddleware = require('../middleware/authMiddleware');
 const User = require('../models/User');
@@ -61,5 +63,23 @@ router.post(
     }
   }
 );
+
+/**
+ * @route Post /dishes/image
+ * @desc add a image
+ * @access Private
+ */
+
+// const upload = multer({
+//   dest: 'testImgs',
+// });
+
+// app.post('/upload', upload.single('upload'), (req, res) => {
+//   res.send();
+// });
+
+router.post('/image', async (req, res) => {
+  res.send('posting a image');
+});
 
 module.exports = router;
