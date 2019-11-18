@@ -9,7 +9,7 @@ app.use(express.json());
 connectDb();
 
 app.use('/users', require('./routes/users'));
-// app.use('/dishes', require('./routes/dishes'));
-// app.use('/auth', require('./routes/auth'));
+app.use('/dishes', require('./routes/dishes'));
+app.use('/auth', require('./routes/auth'));
 
 app.listen(port, () => console.log(`server is running on port ${port}`));
