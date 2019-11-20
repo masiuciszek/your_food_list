@@ -115,10 +115,10 @@ router.post(
     try {
       const user = await User.findById(req.user.id);
       user.avatar = req.file.buffer;
-      console.log(user);
-      console.log(user.avatar);
+      // console.log(user);
+      // console.log(user.avatar);
       await user.save();
-      console.log(user);
+      // console.log(user);
       res.send();
     } catch (err) {
       console.error(err.message);
@@ -145,5 +145,9 @@ router.delete('/me/avatar', authMiddleWare, async (req, res) => {
     res.status(500).send('Server error! Status 500');
   }
 });
+
+// @route     GET /users/:id/avatar
+// @desc      get users avatar
+// @access    Private
 
 module.exports = router;
