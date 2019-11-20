@@ -38,3 +38,8 @@ type ThemeValues = {
   lightShadow: string;
   darkShadow: string;
 }
+
+type NavigationTypes = {
+  text: string;
+  path: string;
+}

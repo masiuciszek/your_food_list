@@ -5,13 +5,19 @@ export default (state: IStateUsers, action: IAction): IStateUsers => {
     case EContextActionTypes.GET_USERS:
       return {
         ...state,
-
+        users: action.payload,
+        loading: false,
       };
 
     case EContextActionTypes.SET_LOADING:
       return {
         ...state,
         loading: true,
+      };
+    case EContextActionTypes.USER_ERROR:
+      return {
+        ...state,
+        error: action.payload,
       };
     default:
       return state;
