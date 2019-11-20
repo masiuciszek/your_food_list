@@ -1,3 +1,4 @@
+// @ts-nocheck
 const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
@@ -19,6 +20,9 @@ const userSchema = Schema({
   password: {
     type: String,
     required: true,
+  },
+  avatar: {
+    type: Buffer,
   },
   date: {
     type: Date,

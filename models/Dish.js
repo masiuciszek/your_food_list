@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// @ts-ignore
 const dishSchema = Schema({
   // Relation
   user: {
@@ -24,6 +25,9 @@ const dishSchema = Schema({
     type: String,
     enum: ['breakfast', 'snack', 'main', 'dessert'],
     default: 'main',
+  },
+  avatar: {
+    type: Buffer,
   },
   date: {
     type: Date,

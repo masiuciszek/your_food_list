@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const User = require('../models/User');
-
+const authMiddleWare = require('../middleware/authMiddleware');
 // @route     GET /users
 // @desc      Fetch all users
 // @access    Public
@@ -91,21 +91,59 @@ router.post(
   }
 );
 
+// @route     POST /users/me/avatar
+// @desc      upload avatar
+// @access    Private
 const upload = multer({
-  dest: 'avatar',
   limits: {
     fileSize: 1000000,
   },
   fileFilter(req, file, cb) {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
-      return cb(new Error('please upload a right file on your avatar'));
+      return cb(new Error('Please upload an image'));
     }
+
     cb(undefined, true);
   },
 });
 
-router.post('/me/avatar', upload.single('avatar'), (req, res) => {
-  res.send();
+router.post(
+  '/me/avatar',
+  authMiddleWare,
+  upload.single('avatar'),
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id);
+      user.avatar = req.file.buffer;
+      console.log(user);
+      console.log(user.avatar);
+      await user.save();
+      console.log(user);
+      res.send();
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error! Status 500');
+    }
+  },
+  (error, req, res, next) => {
+    res.status(400).send({ error: error.message });
+  }
+);
+
+// @route     DELETE /users/me/avatar
+// @desc      delete avatar
+// @access    Private
+
+router.delete('/me/avatar', authMiddleWare, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+    user.avatar = undefined;
+    await user.save();
+    res.json({ msg: 'avatar deleted!' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error! Status 500');
+  }
 });
 
 module.exports = router;

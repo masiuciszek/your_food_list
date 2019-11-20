@@ -71,19 +71,4 @@ router.post(
  * @access Private
  */
 
-// const upload = multer({
-//   dest: 'avatar',
-//   limits: {
-//     fileSize: 1000000,
-//   },
-// });
-
-// app.post('/upload', upload.single('upload'), (req, res) => {
-//   res.send();
-// });
-
-// router.post('/image-test', upload.single('avatar'), async (req, res) => {
-//   res.send();
-// });
-
 module.exports = router;

@@ -1,3 +1,4 @@
+// @ts-nocheck
 const jwt = require('jsonwebtoken');
 const config = require('config');
 
@@ -7,12 +8,13 @@ const authMiddleware = async (req, res, next) => {
     return res.status(400).json({ msg: 'Authentication denied' });
   }
   try {
-    const verified = jwt.verify(token, config.get('jwtSecret'));
+    const decoded = jwt.verify(token, config.get('jwtSecret'));
 
-    req.user = verified.user;
+    req.token = token;
+    req.user = decoded.user;
     next();
   } catch (err) {
-    res.status(400).json({ msg: 'Token not valid' });
+    res.status(401).send({ error: 'Please authenticate.' });
   }
 };
 
