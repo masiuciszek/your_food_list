@@ -1,4 +1,6 @@
+// @ts-nocheck
 const express = require('express');
+const multer = require('multer');
 
 const router = express.Router();
 const { check, validationResult } = require('express-validator');
@@ -88,5 +90,22 @@ router.post(
     }
   }
 );
+
+const upload = multer({
+  dest: 'avatar',
+  limits: {
+    fileSize: 1000000,
+  },
+  fileFilter(req, file, cb) {
+    if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
+      return cb(new Error('please upload a right file on your avatar'));
+    }
+    cb(undefined, true);
+  },
+});
+
+router.post('/me/avatar', upload.single('avatar'), (req, res) => {
+  res.send();
+});
 
 module.exports = router;

@@ -1,7 +1,8 @@
+// @ts-nocheck
 const express = require('express');
 
 const router = express.Router();
-const { check, validationResult } = require('express-validator/check');
+const { check, validationResult } = require('express-validator');
 
 const multer = require('multer');
 const Dish = require('../models/Dish');
@@ -71,15 +72,18 @@ router.post(
  */
 
 // const upload = multer({
-//   dest: 'testImgs',
+//   dest: 'avatar',
+//   limits: {
+//     fileSize: 1000000,
+//   },
 // });
 
 // app.post('/upload', upload.single('upload'), (req, res) => {
 //   res.send();
 // });
 
-router.post('/image', async (req, res) => {
-  res.send('posting a image');
-});
+// router.post('/image-test', upload.single('avatar'), async (req, res) => {
+//   res.send();
+// });
 
 module.exports = router;
