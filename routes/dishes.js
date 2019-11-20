@@ -66,6 +66,65 @@ router.post(
 );
 
 /**
+ * @route PUT /dishes/:id
+ * @desc add a image
+ * @access Private
+ */
+
+router.put('/:id', authMiddleware, async (req, res) => {
+  const { name, country, description, type } = req.body;
+  const dishFields = {};
+  if (name) dishFields.name = name;
+  if (country) dishFields.country = country;
+  if (description) dishFields.description = description;
+  if (type) dishFields.type = type;
+
+  try {
+    let dish = await Dish.findById(req.params.id);
+    if (!dish) {
+      return res.status(400).json({ msg: 'no dish found' });
+    }
+    if (dish.user.toString() !== req.user.id) {
+      return res.status(400).json({ msg: 'auth error' });
+    }
+
+    dish = await Dish.findByIdAndUpdate(
+      req.params.id,
+      { $set: dishFields },
+      { new: true }
+    );
+    res.json(dish);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error, Status 500');
+  }
+});
+
+/**
+ * @route DELETE /dishes/id
+ * @desc remove a dish
+ * @access Private
+ */
+
+router.delete('/:id', authMiddleware, async (req, res) => {
+  try {
+    let dish = await Dish.findById(req.params.id);
+    if (!dish) {
+      return res.status(400).json({ msg: 'no dish found' });
+    }
+    if (dish.user.toString() !== req.user.id) {
+      return res.status(400).json({ msg: 'auth error' });
+    }
+
+    dish = await Dish.findByIdAndDelete(req.params.id);
+    res.json({ msg: 'dish got deleted!', dish });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error, Status 500');
+  }
+});
+
+/**
  * @route Post /dishes/image
  * @desc add a image
  * @access Private
