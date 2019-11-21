@@ -1,11 +1,13 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { MenuAltRight } from 'styled-icons/boxicons-regular';
 import { theme } from './GlobalStyles';
 import navigationLinks from '../../utils/links';
-import {MenuAltRight} from 'styled-icons/boxicons-regular'
 import useToggle from '../../hooks/useToggle';
 import { fadeIn } from '../../utils/animations';
+import { UserStore } from '../../context/users/state.users';
+
 interface Props {
 
 }
@@ -21,6 +23,9 @@ const StyledNav = styled.nav`
     position: relative;
     font-size: 1.4rem;
     text-transform: capitalize;
+    a{
+      color: ${theme.white};
+    }
   }
   #menu-icon{
     position: absolute;
@@ -101,40 +106,49 @@ const MobileList = styled.ul`
 
 
 const Navbar: React.FC<Props> = () => {
-  const [showMobileNav,toggleMobileNav] = useToggle(false)
+  const { user, isAuth } = React.useContext(UserStore);
+  const [showMobileNav, toggleMobileNav] = useToggle(false);
   return (
 
-  <StyledNav>
-    <div className="title">
-    <Link to="/">
-    <h3>Your food list</h3>
-    </Link>
-    </div>
-    <MenuAltRight size="35" id="menu-icon" onClick={toggleMobileNav} />
-    {showMobileNav && (
-
-    <MobileList>
-      {navigationLinks.map((link,i) => (
-        <li key={i}>
-          <Link to={link.path}> {link.text} </Link>
-        </li>
-      ))}
-    </MobileList>
-    )}
-    <StyledNavigationList>
-
-      {navigationLinks.map((link, i) => (
-        <li key={i}>
-          <Link to={link.path}>
+    <StyledNav>
+      <div className="title">
+        <Link to="/">
+          <h3>Your food list</h3>
+          <h5>
+            {isAuth && user ? `Welcome ${user.firstName}` : null}
             {' '}
-            {link.text}
-            {' '}
-          </Link>
-        </li>
-      ))}
-    </StyledNavigationList>
-    {' '}
-  </StyledNav>
-);
-      }
+          </h5>
+        </Link>
+      </div>
+      <MenuAltRight size="35" id="menu-icon" onClick={toggleMobileNav} />
+      {showMobileNav && (
+
+        <MobileList>
+          {navigationLinks.map((link, i) => (
+            <li key={i}>
+              <Link to={link.path}>
+                {' '}
+                {link.text}
+                {' '}
+              </Link>
+            </li>
+          ))}
+        </MobileList>
+      )}
+      <StyledNavigationList>
+
+        {navigationLinks.map((link, i) => (
+          <li key={i}>
+            <Link to={link.path}>
+              {' '}
+              {link.text}
+              {' '}
+            </Link>
+          </li>
+        ))}
+      </StyledNavigationList>
+      {' '}
+    </StyledNav>
+  );
+};
 export default Navbar;

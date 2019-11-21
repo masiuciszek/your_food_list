@@ -7,7 +7,6 @@ interface Props {
 }
 
 const StyledAbout = styled.div`
-
   min-height: 80vh;
 `;
 

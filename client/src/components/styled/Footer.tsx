@@ -7,7 +7,7 @@ interface Props {
 }
 
 const StyledFooter = styled.footer`
-  padding: 1rem;
+  padding: 1.5rem .4rem;
   background: ${theme.dark};
   color: ${theme.white};
 `;
