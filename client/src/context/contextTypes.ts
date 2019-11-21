@@ -11,7 +11,9 @@ export enum EContextActionTypes {
   SET_CURRENT = 'SET_CURRENT',
   GET_DISHES = 'GET_DISHES',
   DISH_ERROR = 'DISH_ERROR',
+  LOAD_USER = 'LOAD_USER',
   DELETE_DISH = 'DELETE_DISH',
+  LOGIN = 'LOGIN',
 }
 
 export interface EContextBaseAction {

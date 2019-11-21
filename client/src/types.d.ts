@@ -7,6 +7,9 @@ type IStateUsers = {
   users: User[];
   loading: boolean;
   error: null;
+  isAuth: boolean;
+  user: null;
+  token: string | null;
 }
 
 type User = {
@@ -15,6 +18,11 @@ type User = {
   lastName: string;
   email: string;
   date: Date;
+}
+
+type FormDataLogin = {
+  email: string;
+  password: string;
 }
 
 
