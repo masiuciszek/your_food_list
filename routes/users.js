@@ -45,11 +45,11 @@ router.post(
     ).isLength({ min: 5 }),
   ],
   async (req, res) => {
-    const validationErrors = validationResult(req);
-    if (!validationErrors.isEmpty()) {
-      return res.status(400).json({ errors: validationErrors.array() });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, avatar } = req.body;
     try {
       // Check if email already exists
       let user = await User.findOne({ email });
@@ -57,10 +57,12 @@ router.post(
         return res.status(400).json({ msg: 'user already exists!' });
       }
       user = new User({
-        firstName,
-        lastName,
-        email,
-        password,
+        // firstName,
+        // lastName,
+        // email,
+        // password,
+        // avatar,
+        ...req.body,
       });
 
       const salt = await bcrypt.genSalt(10);

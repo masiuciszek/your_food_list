@@ -17,8 +17,8 @@ if (localStorage.token) {
 const App: React.FC = () => {
   let a;
   return (
+
     <Layout>
-      <UserProvider>
         <AlertProvider>
           <Switch>
             <Route path="/" exact component={Home} />
@@ -27,8 +27,8 @@ const App: React.FC = () => {
             <Route path="/login" exact component={Login} />
           </Switch>
         </AlertProvider>
-      </UserProvider>
-    </Layout>
+        </Layout>
+
   );
 };
 
