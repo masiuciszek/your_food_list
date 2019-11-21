@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 
 
 export const theme: ThemeValues = {
+  blackish: 'rgba(0,0,0,0.6)',
   primary: '#26A69A',
   secondary: '#D9CB9E',
   darkish: '#374140',

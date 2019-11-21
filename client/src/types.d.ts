@@ -19,6 +19,7 @@ type User = {
 
 
 type ThemeValues = {
+  blackish: string;
   primary: string;
   secondary: string;
   darkish: string;
