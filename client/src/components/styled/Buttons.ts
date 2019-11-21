@@ -9,7 +9,7 @@ interface Props {
 
 export const BtnPrimary = styled.button<Props>`
     text-shadow: 1px 1px 0 rgba(255,255,255,0.4);
-    background-image: linear-gradient(to right, #26A69A 50%, #BDC3C7 50%);
+    background-image: linear-gradient(to right, #26A69A 50%, #fff 50%);
   background-position: 0;
   background-size: 200%;
   padding: .5rem .9rem;

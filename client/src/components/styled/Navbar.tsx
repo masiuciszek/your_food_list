@@ -106,7 +106,9 @@ const Navbar: React.FC<Props> = () => {
 
   <StyledNav>
     <div className="title">
+    <Link to="/">
     <h3>Your food list</h3>
+    </Link>
     </div>
     <MenuAltRight size="35" id="menu-icon" onClick={toggleMobileNav} />
     {showMobileNav && (
