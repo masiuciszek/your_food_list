@@ -9,6 +9,7 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
 const User = require('../models/User');
 const authMiddleWare = require('../middleware/authMiddleware');
+
 // @route     GET /users
 // @desc      Fetch all users
 // @access    Public

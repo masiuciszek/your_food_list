@@ -1,0 +1,17 @@
+import { useState} from 'react'
+
+/**
+ * A custom hook for toggling boolean states.
+ * @param {boolean} initialState - The state to initialise the hook with.
+ * @returns Tuple containing the current state and a toggling function
+ */
+
+ export default (initialState=false):[ boolean, () => void ] => {
+  const [ state,setState] = useState<boolean>(initialState);
+
+  const toggle =() => {
+    setState(!state)
+  }
+
+  return [state,toggle]
+ }

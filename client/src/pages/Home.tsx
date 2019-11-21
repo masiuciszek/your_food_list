@@ -1,17 +1,21 @@
 import * as React from 'react';
 import Users from '../components/users/Users';
-
+import styled from 'styled-components';
 interface Props {
 
 }
 
+const StyledHome = styled.section`
+  height: 80vh;
+`;
+
 const Home: React.FC<Props> = () => (
-  <div>
+  <StyledHome>
     {' '}
     <h1>Home</h1>
     {' '}
     <Users />
     {' '}
-  </div>
+  </StyledHome>
 );
 export default Home;
