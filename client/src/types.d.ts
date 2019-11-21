@@ -12,6 +12,11 @@ type IStateUsers = {
   token: string | null;
 }
 
+type IStateAlerts = {
+  alerts: string[] = [];
+}
+
+
 type User = {
   id: string;
   firstName: string;

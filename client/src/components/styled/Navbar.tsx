@@ -115,7 +115,7 @@ const Navbar: React.FC<Props> = () => {
         <Link to="/">
           <h3>Your food list</h3>
           <h5>
-            {isAuth && user ? `Welcome ${user.firstName}` : null}
+            {isAuth && user && <h4>{user.firstName}</h4> }
             {' '}
           </h5>
         </Link>

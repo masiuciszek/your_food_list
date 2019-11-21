@@ -1,11 +1,14 @@
+/* eslint-disable no-undef */
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import axios from 'axios';
 import userReducer from './user.reducer';
 import { EContextActionTypes, EContextBaseAction } from '../contextTypes';
 import setAuthToken from '../../utils/setAuthToken';
-// interface Props {
 
-// }
+interface Props {
+  children: React.ReactNode;
+}
 
 const initialState: IStateUsers = {
   users: [],
@@ -19,7 +22,7 @@ const initialState: IStateUsers = {
 export const UserStore = React.createContext<IStateUsers | any>(initialState);
 
 
-const UserProvider: React.FC = (props: any): JSX.Element => {
+const UserProvider: React.FC = ({ children }): JSX.Element => {
   const [state, dispatch] = React.useReducer(userReducer, initialState);
 
   const setLoading = () => {
@@ -27,7 +30,9 @@ const UserProvider: React.FC = (props: any): JSX.Element => {
   };
 
   const loadUser = async () => {
-    setAuthToken(localStorage.token);
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
     try {
       const res = await axios.get('/auth');
       dispatch({
@@ -35,7 +40,7 @@ const UserProvider: React.FC = (props: any): JSX.Element => {
         payload: res.data,
       });
     } catch (err) {
-      dispatch({ type: EContextActionTypes.USER_ERROR, payload: err.message });
+      dispatch({ type: EContextActionTypes.USER_ERROR });
     }
   };
 
@@ -57,10 +62,15 @@ const UserProvider: React.FC = (props: any): JSX.Element => {
     };
     try {
       const res = await axios.post('/auth', formData, config);
-      dispatch({ type: EContextActionTypes.LOGIN, payload: res.data });
+      dispatch(
+        {
+          type: EContextActionTypes.LOGIN,
+          payload: res.data,
+        },
+      );
       loadUser();
     } catch (err) {
-      dispatch({ type: EContextActionTypes.USER_ERROR, payload: err.message });
+      dispatch({ type: EContextActionTypes.LOGIN_FAIL, payload: err.message });
     }
   };
 
@@ -77,7 +87,7 @@ const UserProvider: React.FC = (props: any): JSX.Element => {
       login,
     }}
     >
-      {props.children}
+      {children}
     </UserStore.Provider>
   );
 };

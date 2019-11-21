@@ -17,7 +17,7 @@ const Login: React.FC<ChildComponentProps> = (props) => {
     password: '',
   });
 
-  console.log(props.history.push);
+
 
   const {
     email, password,

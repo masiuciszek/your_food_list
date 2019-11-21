@@ -47,11 +47,17 @@ router.post(
       if (!isMatch) {
         return res.status(400).json({ msg: 'Authentication Error' });
       }
+      const payload = {
+        user: {
+          // comes from user id
+          id: user.id,
+        },
+      };
 
       jwt.sign(
-        { user: { id: user.id } },
+        payload,
         config.get('jwtSecret'),
-        { expiresIn: 60 * 60 * 60 },
+        { expiresIn: 360000 },
         (err, token) => {
           if (err) {
             throw new Error(err);

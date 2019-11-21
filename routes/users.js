@@ -77,7 +77,7 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 60 * 60 * 60 },
+        { expiresIn: 36000000 },
         (err, token) => {
           if (err) {
             throw new Error('could not register');
