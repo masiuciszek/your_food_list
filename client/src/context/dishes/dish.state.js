@@ -32,6 +32,8 @@ const DishProvider = ({ children }) => {
 
   const [state, dispatch] = React.useReducer(dishReducer, initialState);
 
+  const addDish = () => {};
+
   return (
     <DishContext.Provider
       value={{

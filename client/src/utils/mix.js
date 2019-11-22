@@ -53,3 +53,28 @@ export const iconsList = [
     icon: <Facebook size="35" />,
   },
 ];
+
+// .grid-2-3 {
+//   display: grid;
+//   grid-template-columns: 2fr 3fr;
+//   grid-gap: 2rem;
+// }
+
+/* Grid */
+// .grid-2 {
+//   display: grid;
+//   grid-template-columns: repeat(2, 1fr);
+//   grid-gap: 2rem;
+// }
+
+// .grid-3 {
+//   display: grid;
+//   grid-template-columns: repeat(3, 1fr);
+//   grid-gap: 1rem;
+// }
+
+// .grid-4 {
+//   display: grid;
+//   grid-template-columns: repeat(4, 1fr);
+//   grid-gap: 2rem;
+// }

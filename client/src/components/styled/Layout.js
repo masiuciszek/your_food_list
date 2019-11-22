@@ -7,6 +7,7 @@ import Footer from './Footer';
 
 export const theme = {
   black: '#393939',
+  blackShadow: 'rgba(0,0,0,0.5)',
   darkishGreen: '#1c6373',
   secondary: '#23aa8f',
   offWhite: '#EDEDED',
