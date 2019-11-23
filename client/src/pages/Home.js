@@ -1,11 +1,12 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/fa-solid';
 import Dishes from '../components/dishes/Dishes';
 import DishForm, { StyledInput } from '../components/dishes/DishForm';
 import useToggle from '../hooks/useToggle';
+import { DishContext } from '../context/dishes/dish.state';
 
 const Center = styled.div`
   display: flex;
@@ -22,7 +23,6 @@ const Center = styled.div`
     left: ${({ showSearch }) => !showSearch && 0};
     top: ${({ showSearch }) => !showSearch && '-2rem'};
     border-radius: ${({ showSearch }) => !showSearch && '40%'};
-
     visibility: ${({ showSearch }) => !showSearch && 'hidden'};
   }
   .icon {
@@ -39,8 +39,6 @@ const HomeWrapper = styled.section`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  /* TODO:DELETE */
-  border: 2px solid red;
   justify-content: center;
   align-items: center;
   justify-items: center;
@@ -52,17 +50,33 @@ const HomeWrapper = styled.section`
   }
 `;
 const HomePage = () => {
+  const { searchDish, clearFilter } = React.useContext(DishContext);
   const [showSearch, toggleFn] = useToggle(false);
+  const text = useRef('');
+
+  const handleChange = e => {
+    if (text.current.value !== '') {
+      searchDish(e.target.value);
+    } else {
+      clearFilter();
+    }
+  };
 
   return (
     <>
       <Center showSearch={showSearch}>
         <span className="icon" onClick={toggleFn}>
-          Search for your Dish
-          <Search width="35" />{' '}
+          Search for your Dish <br />
+          <Search width="25" />{' '}
         </span>
-        <StyledInput type="text" className="search" placeholder="search" />
-        <HomeWrapper>
+        <StyledInput
+          type="text"
+          className="search"
+          placeholder="search"
+          onChange={handleChange}
+          ref={text}
+        />
+        <HomeWrapper onClick={toggleFn}>
           <DishForm />
           <Dishes />
         </HomeWrapper>

@@ -17,7 +17,7 @@ export default (state, { type, payload }) => {
     case FILTER_DISH:
       return {
         ...state,
-        dishes: state.dishes.filter(dish => {
+        filteredDishes: state.dishes.filter(dish => {
           const text = new RegExp(`${payload}`, 'gi');
           return dish.name.match(text) || dish.name.match(text);
         }),

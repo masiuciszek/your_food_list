@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 // TODO: Delete uuid from here
@@ -7,8 +7,8 @@ import { StyledBtn } from '../styled/Buttons';
 import { DishContext } from '../../context/dishes/dish.state';
 
 const DishForm = () => {
-  const { addDish } = React.useContext(DishContext);
-  const [formData, setFormData] = React.useState({
+  const { addDish } = useContext(DishContext);
+  const [formData, setFormData] = useState({
     name: '',
     type: 'main',
     country: '',
@@ -78,16 +78,14 @@ DishForm.propTypes = {};
 
 const DishFormWrapper = styled.div`
   padding: 0.4rem;
-  /* TODO:DELETE */
-  border: 2px solid red;
+
   height: 100%;
   width: 100%;
 `;
 
 export const StyledForm = styled.form`
   padding: 0.4rem;
-  /* TODO:DELETe */
-  border: 2px solid blue;
+
   [placeholder='description'] {
     height: 6rem;
     ::placeholder {

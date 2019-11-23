@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { PizzaSlice } from 'styled-icons/fa-solid';
+import { PizzaSlice, Edit } from 'styled-icons/fa-solid';
 import { Delete } from 'styled-icons/feather';
 import { DishContext } from '../../context/dishes/dish.state';
 
@@ -19,7 +19,7 @@ const StyledDishItem = styled.div`
   &:hover {
     box-shadow: ${props => props.theme.darkShadow};
   }
-  .delete {
+  .btn-group {
     margin-left: auto;
     width: 10rem;
     display: flex;
@@ -27,8 +27,14 @@ const StyledDishItem = styled.div`
     span {
       transition: ${props => props.theme.mainTransition};
       cursor: pointer;
+      margin: 0 0.5rem;
       &:hover {
         color: ${props => props.theme.danger};
+      }
+    }
+    span:first-child {
+      &:hover {
+        color: ${props => props.theme.primaryColor};
       }
     }
   }
@@ -92,7 +98,10 @@ const DishItem = ({ dish }) => {
         <small>{type}</small>{' '}
       </Label>
       <p>{description}</p>
-      <div className="delete">
+      <div className="btn-group">
+        <span>
+          <Edit size="30" />
+        </span>
         <span onClick={() => deleteDish(id)}>
           <Delete size="30" />
         </span>
