@@ -1,4 +1,10 @@
-import { GET_DISHES, ADD_DISH, DELETE_DISH, FILTER_DISH } from '../types';
+import {
+  GET_DISHES,
+  ADD_DISH,
+  DELETE_DISH,
+  FILTER_DISH,
+  SET_CURRENT,
+} from '../types';
 
 export default (state, { type, payload }) => {
   switch (type) {
@@ -21,6 +27,12 @@ export default (state, { type, payload }) => {
           const text = new RegExp(`${payload}`, 'gi');
           return dish.name.match(text) || dish.name.match(text);
         }),
+        loading: false,
+      };
+    case SET_CURRENT:
+      return {
+        ...state,
+        current: payload,
         loading: false,
       };
     default:

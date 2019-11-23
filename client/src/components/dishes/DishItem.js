@@ -72,7 +72,7 @@ const Label = styled.div`
 `;
 
 const DishItem = ({ dish }) => {
-  const { deleteDish } = React.useContext(DishContext);
+  const { deleteDish, setCurrent } = React.useContext(DishContext);
   const { name, country, type, description, id } = dish;
 
   return (
@@ -99,7 +99,7 @@ const DishItem = ({ dish }) => {
       </Label>
       <p>{description}</p>
       <div className="btn-group">
-        <span>
+        <span onClick={() => setCurrent(dish)}>
           <Edit size="30" />
         </span>
         <span onClick={() => deleteDish(id)}>
