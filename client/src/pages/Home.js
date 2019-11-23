@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Search } from 'styled-icons/fa-solid';
@@ -50,9 +50,17 @@ const HomeWrapper = styled.section`
   }
 `;
 const HomePage = () => {
-  const { searchDish, clearFilter } = React.useContext(DishContext);
+  const { searchDish, clearFilter, filteredDishes } = React.useContext(
+    DishContext
+  );
   const [showSearch, toggleFn] = useToggle(false);
   const text = useRef('');
+
+  useEffect(() => {
+    if (filteredDishes === null) {
+      text.current.value = '';
+    }
+  });
 
   const handleChange = e => {
     if (text.current.value !== '') {

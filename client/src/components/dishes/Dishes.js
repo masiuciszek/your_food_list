@@ -9,11 +9,14 @@ const Dishes = () => {
   const { dishes, filteredDishes } = React.useContext(DishContext);
   // TODO: Check filter
   // console.log('FILTRED   ', filteredDishes);
+
   return (
     <StyledDish>
-      {dishes.map(dish => (
-        <DishItem key={dish.id} dish={dish} />
-      ))}
+      {dishes.length === 0 ? (
+        <h4>Add A Dish</h4>
+      ) : (
+        dishes.map(dish => <DishItem key={dish.id} dish={dish} />)
+      )}
     </StyledDish>
   );
 };
