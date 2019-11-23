@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
 import dishReducer from './dish.reducer';
+import { ADD_DISH } from '../types';
 
 export const DishContext = React.createContext();
 
@@ -14,30 +15,39 @@ const DishProvider = ({ children }) => {
         name: 'Pizza',
         country: 'Italy',
         type: 'main',
+        description: 'Love it it so easy and so tasty boooiiii',
       },
       {
         id: uuid(),
         name: 'PannaCotta',
         country: 'Italy',
         type: 'Desert',
+        description: 'Love it it so easy and so tasty boooiiii',
       },
       {
         id: uuid(),
         name: 'Ost Macka',
         country: 'Sweden',
         type: 'breakfast',
+        description: 'Love it it so easy and so tasty boooiiii',
       },
     ],
   };
 
   const [state, dispatch] = React.useReducer(dishReducer, initialState);
 
-  const addDish = () => {};
+  const addDish = formData => {
+    dispatch({
+      type: ADD_DISH,
+      payload: formData,
+    });
+  };
 
   return (
     <DishContext.Provider
       value={{
         dishes: state.dishes,
+        addDish,
       }}
     >
       {children}
