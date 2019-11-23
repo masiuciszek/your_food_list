@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// TODO: Delete uuid from here
-import uuid from 'uuid/v4';
 import { StyledBtn } from '../styled/Buttons';
 import { DishContext } from '../../context/dishes/dish.state';
 
 const DishForm = ({ search, closeSearchInput }) => {
-  const { addDish } = useContext(DishContext);
+  const { addDish, current, clearCurrent, updateDish } = useContext(
+    DishContext
+  );
   const [formData, setFormData] = useState({
     name: '',
     type: 'main',
@@ -16,14 +16,38 @@ const DishForm = ({ search, closeSearchInput }) => {
   });
   const { name, type, country, description } = formData;
 
+  useEffect(() => {
+    if (current !== null) {
+      setFormData(current);
+    } else {
+      setFormData({
+        name: '',
+        type: 'main',
+        country: '',
+        description: '',
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [current, DishContext]);
+
   const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    const newDish = { id: uuid(), name, type, country, description };
-    addDish(newDish);
+    // const newDish = { id: uuid(), name, type, country, description };
+    if (current === null) {
+      addDish(formData);
+    } else {
+      updateDish(formData);
+    }
+    setFormData({
+      name: '',
+      type: 'main',
+      country: '',
+      description: '',
+    });
   };
 
   const handleClose = () => {
@@ -34,6 +58,7 @@ const DishForm = ({ search, closeSearchInput }) => {
 
   return (
     <DishFormWrapper onClick={handleClose}>
+      <h3>{!current ? 'Add A Dish' : 'Update your dish'}</h3>
       <StyledForm onSubmit={handleSubmit}>
         <FormGroup className="form-group">
           <StyledInput
@@ -73,7 +98,17 @@ const DishForm = ({ search, closeSearchInput }) => {
           />
         </FormGroup>
         <FormGroup>
-          <StyledBtn type="submit">Submit</StyledBtn>
+          <StyledBtn type="submit">
+            {!current ? 'Add new dish' : 'Update dish'}
+          </StyledBtn>
+          {current && (
+            <StyledBtn
+              style={{ marginLeft: '0.5rem' }}
+              onClick={() => clearCurrent()}
+            >
+              Regret
+            </StyledBtn>
+          )}
         </FormGroup>
       </StyledForm>
     </DishFormWrapper>
@@ -90,6 +125,9 @@ const DishFormWrapper = styled.div`
 
   height: 100%;
   width: 100%;
+  h3 {
+    padding: 0 1rem;
+  }
 `;
 
 export const StyledForm = styled.form`

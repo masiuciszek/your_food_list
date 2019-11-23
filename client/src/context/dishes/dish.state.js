@@ -10,6 +10,7 @@ import {
   CLEAR_FILTER,
   SET_CURRENT,
   CLEAR_CURRENT,
+  UPDATE_DISH,
 } from '../types';
 
 export const DishContext = React.createContext();
@@ -28,7 +29,7 @@ const DishProvider = ({ children }) => {
         id: uuid(),
         name: 'PannaCotta',
         country: 'Italy',
-        type: 'Desert',
+        type: 'desert',
         description: 'Love it it so easy and so tasty boooiiii',
       },
       {
@@ -81,6 +82,13 @@ const DishProvider = ({ children }) => {
     dispatch({ type: CLEAR_FILTER });
   };
 
+  const updateDish = dish => {
+    dispatch({
+      type: UPDATE_DISH,
+      payload: dish,
+    });
+  };
+
   return (
     <DishContext.Provider
       value={{
@@ -93,6 +101,7 @@ const DishProvider = ({ children }) => {
         clearFilter,
         setCurrent,
         clearCurrent,
+        updateDish,
       }}
     >
       {children}

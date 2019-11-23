@@ -5,6 +5,7 @@ import {
   FILTER_DISH,
   SET_CURRENT,
   CLEAR_CURRENT,
+  UPDATE_DISH,
 } from '../types';
 
 export default (state, { type, payload }) => {
@@ -40,6 +41,14 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         current: null,
+        loading: false,
+      };
+    case UPDATE_DISH:
+      return {
+        ...state,
+        dishes: state.dishes.map(dish =>
+          dish.id === payload.id ? payload : dish
+        ),
         loading: false,
       };
     default:

@@ -59,10 +59,10 @@ const Label = styled.div`
   box-shadow: ${props => props.theme.lightShadow};
   color: ${({ type, theme }) => type === 'snack' && `${theme.dark}`};
   background: ${({ type, theme }) =>
-    (type === 'main'.toLowerCase() && `${theme.darkishGreen}`) ||
-    (type === 'Desert' && `${theme.secondary}`) ||
-    (type === 'breakfast'.toLowerCase() && `${theme.dark}`) ||
-    (type === 'snack' && `${theme.offWhite}`)};
+    (type.toLowerCase() === 'main' && `${theme.darkishGreen}`) ||
+    (type.toLowerCase() === 'desert' && `${theme.secondary}`) ||
+    (type.toLowerCase() === 'breakfast' && `${theme.dark}`) ||
+    (type.toLowerCase() === 'snack' && `${theme.offWhite}`)};
   @media (max-width: 845px) {
     width: 7rem;
   }
