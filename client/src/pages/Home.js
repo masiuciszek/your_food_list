@@ -28,9 +28,10 @@ const Center = styled.div`
   .icon {
     visibility: ${({ showSearch }) => showSearch && 'hidden'};
     position: absolute;
-    left: 0;
+    left: -2rem;
     top: -0.8rem;
     z-index: 2;
+
     cursor: pointer;
   }
 `;
@@ -42,7 +43,8 @@ const HomeWrapper = styled.section`
   justify-content: center;
   align-items: center;
   justify-items: center;
-  @media (min-width: 1020px) {
+  /* 1020 */
+  @media (min-width: 1120px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -74,7 +76,6 @@ const HomePage = () => {
     <>
       <Center showSearch={showSearch}>
         <span className="icon" onClick={toggleFn}>
-          Search for your Dish <br />
           <Search width="25" />{' '}
         </span>
         <StyledInput

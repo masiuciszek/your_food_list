@@ -41,9 +41,9 @@ const StyledDishItem = styled.div`
   @media (max-width: 845px) {
     width: 25rem;
   }
-  /* @media (max-width: 459px) {
-    width: 100%;
-  } */
+  @media (max-width: 459px) {
+    width: 15rem;
+  }
 `;
 
 const Label = styled.div`
@@ -67,7 +67,10 @@ const Label = styled.div`
     width: 7rem;
   }
   @media (max-width: 459px) {
-    width: 5rem;
+    /* width: 5rem;
+    bottom: 0 !important;
+    height: 2rem; */
+    display: none;
   }
 `;
 

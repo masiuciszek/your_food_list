@@ -7,23 +7,32 @@ import Home from './pages/Home';
 import About from './pages/About';
 import ErrorPage from './pages/404';
 import DishProvider from './context/dishes/dish.state';
+import AuthProvider from './context/auth/auth.state';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import AlertProvider from './context/alert/alert.state';
+import Alert from './components/alert/Alert';
 
-const App = () => {
-  let a;
-  return (
+const App = () => (
+  <AuthProvider>
     <DishProvider>
-      <Layout>
-        <AppWrapper>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
-            <Route component={ErrorPage} />
-          </Switch>
-        </AppWrapper>
-      </Layout>
+      <AlertProvider>
+        <Layout>
+          <AppWrapper>
+            <Alert />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route component={ErrorPage} />
+            </Switch>
+          </AppWrapper>
+        </Layout>
+      </AlertProvider>
     </DishProvider>
-  );
-};
+  </AuthProvider>
+);
 
 App.propTypes = {};
 
