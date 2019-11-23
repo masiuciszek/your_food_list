@@ -76,8 +76,8 @@ const HomePage = () => {
           onChange={handleChange}
           ref={text}
         />
-        <HomeWrapper onClick={toggleFn}>
-          <DishForm />
+        <HomeWrapper>
+          <DishForm search={showSearch} closeSearchInput={toggleFn} />
           <Dishes />
         </HomeWrapper>
       </Center>

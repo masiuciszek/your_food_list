@@ -9,6 +9,7 @@ import {
   FILTER_DISH,
   CLEAR_FILTER,
   SET_CURRENT,
+  CLEAR_CURRENT,
 } from '../types';
 
 export const DishContext = React.createContext();
@@ -66,6 +67,12 @@ const DishProvider = ({ children }) => {
     });
   };
 
+  const clearCurrent = () => {
+    dispatch({
+      type: CLEAR_CURRENT,
+    });
+  };
+
   const searchDish = text => {
     dispatch({ type: FILTER_DISH, payload: text });
   };
@@ -85,6 +92,7 @@ const DishProvider = ({ children }) => {
         searchDish,
         clearFilter,
         setCurrent,
+        clearCurrent,
       }}
     >
       {children}

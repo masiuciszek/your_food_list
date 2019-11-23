@@ -6,7 +6,7 @@ import uuid from 'uuid/v4';
 import { StyledBtn } from '../styled/Buttons';
 import { DishContext } from '../../context/dishes/dish.state';
 
-const DishForm = () => {
+const DishForm = ({ search, closeSearchInput }) => {
   const { addDish } = useContext(DishContext);
   const [formData, setFormData] = useState({
     name: '',
@@ -26,8 +26,14 @@ const DishForm = () => {
     addDish(newDish);
   };
 
+  const handleClose = () => {
+    if (search) {
+      closeSearchInput();
+    }
+  };
+
   return (
-    <DishFormWrapper>
+    <DishFormWrapper onClick={handleClose}>
       <StyledForm onSubmit={handleSubmit}>
         <FormGroup className="form-group">
           <StyledInput
@@ -74,7 +80,10 @@ const DishForm = () => {
   );
 };
 
-DishForm.propTypes = {};
+DishForm.propTypes = {
+  search: PropTypes.bool,
+  closeSearchInput: PropTypes.func.isRequired,
+};
 
 const DishFormWrapper = styled.div`
   padding: 0.4rem;

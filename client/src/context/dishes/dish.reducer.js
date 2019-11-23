@@ -4,6 +4,7 @@ import {
   DELETE_DISH,
   FILTER_DISH,
   SET_CURRENT,
+  CLEAR_CURRENT,
 } from '../types';
 
 export default (state, { type, payload }) => {
@@ -33,6 +34,12 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         current: payload,
+        loading: false,
+      };
+    case CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null,
         loading: false,
       };
     default:

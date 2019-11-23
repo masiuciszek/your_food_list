@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { PizzaSlice, Edit } from 'styled-icons/fa-solid';
@@ -72,8 +72,13 @@ const Label = styled.div`
 `;
 
 const DishItem = ({ dish }) => {
-  const { deleteDish, setCurrent } = React.useContext(DishContext);
+  const { deleteDish, setCurrent, clearCurrent } = useContext(DishContext);
   const { name, country, type, description, id } = dish;
+
+  const handleDelete = () => {
+    deleteDish(id);
+    clearCurrent();
+  };
 
   return (
     <StyledDishItem>
@@ -102,7 +107,7 @@ const DishItem = ({ dish }) => {
         <span onClick={() => setCurrent(dish)}>
           <Edit size="30" />
         </span>
-        <span onClick={() => deleteDish(id)}>
+        <span onClick={handleDelete}>
           <Delete size="30" />
         </span>
       </div>
