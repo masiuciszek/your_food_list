@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { PizzaSlice } from 'styled-icons/fa-solid';
+import { Delete } from 'styled-icons/feather';
+import { DishContext } from '../../context/dishes/dish.state';
 
 const StyledDishItem = styled.div`
   padding: 0.5rem;
@@ -16,6 +18,19 @@ const StyledDishItem = styled.div`
   box-shadow: ${props => props.theme.lightShadow};
   &:hover {
     box-shadow: ${props => props.theme.darkShadow};
+  }
+  .delete {
+    margin-left: auto;
+    width: 10rem;
+    display: flex;
+    justify-content: flex-end;
+    span {
+      transition: ${props => props.theme.mainTransition};
+      cursor: pointer;
+      &:hover {
+        color: ${props => props.theme.danger};
+      }
+    }
   }
   @media (max-width: 845px) {
     width: 25rem;
@@ -33,12 +48,15 @@ const Label = styled.div`
   right: 0;
   border: 1px solid ${({ theme }) => theme.black};
   width: 10rem;
+  letter-spacing: 0.1rem;
   border-radius: 0.4rem;
   box-shadow: ${props => props.theme.lightShadow};
+  color: ${({ type, theme }) => type === 'snack' && `${theme.dark}`};
   background: ${({ type, theme }) =>
     (type === 'main'.toLowerCase() && `${theme.darkishGreen}`) ||
     (type === 'Desert' && `${theme.secondary}`) ||
-    (type === 'breakfast'.toLowerCase() && `${theme.dark}`)};
+    (type === 'breakfast'.toLowerCase() && `${theme.dark}`) ||
+    (type === 'snack' && `${theme.offWhite}`)};
   @media (max-width: 845px) {
     width: 7rem;
   }
@@ -48,7 +66,9 @@ const Label = styled.div`
 `;
 
 const DishItem = ({ dish }) => {
-  const { name, country, type, description } = dish;
+  const { deleteDish } = React.useContext(DishContext);
+  const { name, country, type, description, id } = dish;
+
   return (
     <StyledDishItem>
       <h3>
@@ -72,6 +92,11 @@ const DishItem = ({ dish }) => {
         <small>{type}</small>{' '}
       </Label>
       <p>{description}</p>
+      <div className="delete">
+        <span onClick={() => deleteDish(id)}>
+          <Delete size="30" />
+        </span>
+      </div>
     </StyledDishItem>
   );
 };

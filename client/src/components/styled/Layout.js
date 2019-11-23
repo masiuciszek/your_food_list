@@ -10,6 +10,7 @@ export const theme = {
   blackShadow: 'rgba(0,0,0,0.5)',
   darkishGreen: '#1c6373',
   secondary: '#23aa8f',
+  danger: '#df4230',
   offWhite: '#EDEDED',
   maxWidth: '1000px',
   bs: '0 12px 24px 0 rgba(0, 0, 0, 0.09)',

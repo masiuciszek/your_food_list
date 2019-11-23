@@ -1,7 +1,80 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+// TODO: Delete uuid from here
+import uuid from 'uuid/v4';
 import { StyledBtn } from '../styled/Buttons';
+import { DishContext } from '../../context/dishes/dish.state';
+
+const DishForm = () => {
+  const { addDish } = React.useContext(DishContext);
+  const [formData, setFormData] = React.useState({
+    name: '',
+    type: 'main',
+    country: '',
+    description: '',
+  });
+  const { name, type, country, description } = formData;
+
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    const newDish = { id: uuid(), name, type, country, description };
+    addDish(newDish);
+  };
+
+  return (
+    <DishFormWrapper>
+      <StyledForm onSubmit={handleSubmit}>
+        <FormGroup className="form-group">
+          <StyledInput
+            type="text"
+            placeholder="Dish Name"
+            name="name"
+            onChange={handleChange}
+            value={name}
+          />
+        </FormGroup>
+        <FormGroup className="form-group">
+          <StyledInput
+            type="text"
+            name="country"
+            placeholder="Country"
+            onChange={handleChange}
+            value={country}
+          />
+        </FormGroup>
+
+        <FormGroup>
+          <select name="type" id="" onChange={handleChange} value={type}>
+            <StyledOption disabled>Choose food type</StyledOption>
+            <StyledOption value="breakfast">breakfast</StyledOption>
+            <StyledOption value="main">main</StyledOption>
+            <StyledOption value="dessert">dessert</StyledOption>
+            <StyledOption value="snack">snack</StyledOption>
+          </select>
+        </FormGroup>
+        <FormGroup>
+          <StyledInput
+            type="text"
+            name="description"
+            placeholder="description"
+            onChange={handleChange}
+            value={description}
+          />
+        </FormGroup>
+        <FormGroup>
+          <StyledBtn type="submit">Submit</StyledBtn>
+        </FormGroup>
+      </StyledForm>
+    </DishFormWrapper>
+  );
+};
+
+DishForm.propTypes = {};
 
 const DishFormWrapper = styled.div`
   padding: 0.4rem;
@@ -46,39 +119,5 @@ export const FormGroup = styled.section`
   padding: 0.5rem;
 `;
 export const StyledOption = styled.option``;
-
-const DishForm = () => {
-  let a;
-  return (
-    <DishFormWrapper>
-      <StyledForm>
-        <FormGroup className="form-group">
-          <StyledInput type="text" placeholder="Dish Name" />
-        </FormGroup>
-        <FormGroup className="form-group">
-          <StyledInput type="text" placeholder="Country" />
-        </FormGroup>
-
-        <FormGroup>
-          <select name="" id="">
-            <StyledOption disabled>Choose food type</StyledOption>
-            <StyledOption value="breakfast">breakfast</StyledOption>
-            <StyledOption value="main">main</StyledOption>
-            <StyledOption value="dessert">dessert</StyledOption>
-            <StyledOption value="snack">snack</StyledOption>
-          </select>
-        </FormGroup>
-        <FormGroup>
-          <StyledInput type="text" placeholder="description" />
-        </FormGroup>
-        <FormGroup>
-          <StyledBtn type="submit">Submit</StyledBtn>
-        </FormGroup>
-      </StyledForm>
-    </DishFormWrapper>
-  );
-};
-
-DishForm.propTypes = {};
 
 export default DishForm;
