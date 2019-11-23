@@ -122,11 +122,17 @@ DishForm.propTypes = {
 
 const DishFormWrapper = styled.div`
   padding: 0.4rem;
-
+  /*  */
   height: 100%;
   width: 100%;
+
   h3 {
     padding: 0 1rem;
+  }
+  @media (max-width: 1106px) {
+    input {
+      width: 100%;
+    }
   }
 `;
 

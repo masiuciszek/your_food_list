@@ -1,6 +1,8 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import authReducer from './auth.reducer';
+import { REGISTER_FAIL, REGISTER_SUCCESS } from '../types';
 
 export const AuthContext = createContext();
 
@@ -16,7 +18,23 @@ const AuthProvider = ({ children }) => {
 
   const loadUser = () => {};
   const login = () => {};
-  const register = () => {};
+
+  const register = async formData => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post('/users', formData, config);
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
+    }
+  };
 
   return (
     <AuthContext.Provider

@@ -45,11 +45,11 @@ const Register = () => {
     firstName: '',
     lastName: '',
     email: '',
-    password1: '',
+    password: '',
     password2: '',
   });
 
-  const { firstName, lastName, email, password1, password2 } = user;
+  const { firstName, lastName, email, password, password2 } = user;
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -60,9 +60,18 @@ const Register = () => {
       firstName === '' ||
       lastName === '' ||
       email === '' ||
-      password1 === ''
+      password === ''
     ) {
       setAlert('Please fill in the fields', 'warning');
+    } else {
+      register({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+      // TODO:DELETE
+      console.log('Registered!');
     }
   };
 
@@ -105,11 +114,10 @@ const Register = () => {
             <StyledInput
               placeholder="password"
               type="password"
-              name="password1"
-              value={password1}
+              name="password"
+              value={password}
               onChange={handleChange}
               required
-              minLength="5"
             />
           </FormGroup>
           <FormGroup>
