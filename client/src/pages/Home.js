@@ -78,7 +78,7 @@ const Center = styled.div`
   .icon {
     visibility: ${({ showSearch }) => showSearch && 'hidden'};
     position: absolute;
-    left: -2rem;
+    left: 1rem;
     top: -0.8rem;
     z-index: 2;
 

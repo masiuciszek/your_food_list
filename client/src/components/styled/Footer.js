@@ -84,7 +84,9 @@ const Footer = () => {
       <IconsGroup>
         {iconsList.map(icon => (
           <li key={icon.id}>
-            <a href={icon.url}>{icon.icon}</a>
+            <a href={icon.url} target="_blank" rel="noopener noreferrer">
+              {icon.icon}
+            </a>
           </li>
         ))}
       </IconsGroup>

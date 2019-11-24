@@ -21,7 +21,6 @@ export const RegisterStyled = styled.section`
     margin: 0 auto;
     padding: 1rem 0;
     box-shadow: ${({ theme }) => theme.lightShadow};
-    border: 2px solid ${({ theme }) => theme.black};
     width: 80%;
     input,
     button {

@@ -23,8 +23,8 @@ export const fadeDown = keyframes`
 export const links = [
   {
     id: uuid(),
-    text: 'home',
-    path: '/',
+    text: 'info',
+    path: '/info',
   },
   {
     id: uuid(),
@@ -36,22 +36,22 @@ export const links = [
 export const iconsList = [
   {
     id: uuid(),
-    url: '/',
+    url: 'https://github.com/masiuciszek',
     icon: <Github size="35" />,
   },
   {
     id: uuid(),
-    url: '/',
+    url: 'https://twitter.com/CiszekMarcell',
     icon: <Twitter size="35" />,
   },
   {
     id: uuid(),
-    url: '/',
+    url: 'https://codepen.io/legionista1994',
     icon: <Codepen size="35" />,
   },
   {
     id: uuid(),
-    url: '/',
+    url: 'https://www.marcellable.com/',
     icon: <Facebook size="35" />,
   },
 ];
