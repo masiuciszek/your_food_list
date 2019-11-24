@@ -19,16 +19,6 @@ export const links = [
     text: 'about',
     path: '/about',
   },
-  {
-    id: uuid(),
-    text: 'login',
-    path: '/login',
-  },
-  {
-    id: uuid(),
-    text: 'register',
-    path: '/register',
-  },
 ];
 
 export const iconsList = [

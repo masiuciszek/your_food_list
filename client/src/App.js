@@ -13,6 +13,7 @@ import Login from './components/auth/Login';
 import AlertProvider from './context/alert/alert.state';
 import Alert from './components/alert/Alert';
 import setAuthToken from './utils/setAuthToken';
+import User from './pages/User';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -30,6 +31,7 @@ const App = () => (
               <Route exact path="/about" component={About} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/user-profile" component={User} />
               <Route component={ErrorPage} />
             </Switch>
           </AppWrapper>
