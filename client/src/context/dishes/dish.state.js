@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'uuid/v4';
+import axios from 'axios';
 import dishReducer from './dish.reducer';
 import {
   ADD_DISH,
@@ -11,47 +12,57 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_DISH,
+  DISH_ERROR,
+  GET_DISHES,
 } from '../types';
 
 export const DishContext = React.createContext();
 
 const DishProvider = ({ children }) => {
   const initialState = {
-    dishes: [
-      {
-        id: uuid(),
-        name: 'Pizza',
-        country: 'Italy',
-        type: 'main',
-        description: 'Love it it so easy and so tasty boooiiii',
-      },
-      {
-        id: uuid(),
-        name: 'PannaCotta',
-        country: 'Italy',
-        type: 'desert',
-        description: 'Love it it so easy and so tasty boooiiii',
-      },
-      {
-        id: uuid(),
-        name: 'Ost Macka',
-        country: 'Sweden',
-        type: 'breakfast',
-        description: 'Love it it so easy and so tasty boooiiii',
-      },
-    ],
+    dishes: null,
     loading: true,
     filteredDishes: null,
     current: null,
+    error: null,
   };
 
   const [state, dispatch] = React.useReducer(dishReducer, initialState);
 
-  const addDish = formData => {
-    dispatch({
-      type: ADD_DISH,
-      payload: formData,
-    });
+  const getDishes = async () => {
+    try {
+      const res = await axios.get('/dishes');
+      dispatch({
+        type: GET_DISHES,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: DISH_ERROR,
+        payload: err.response,
+      });
+    }
+  };
+
+  const addDish = async newDish => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post('/dishes', newDish, config);
+
+      dispatch({
+        type: ADD_DISH,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: DISH_ERROR,
+        payload: err.response,
+      });
+    }
   };
 
   const deleteDish = id => {
@@ -95,6 +106,8 @@ const DishProvider = ({ children }) => {
         dishes: state.dishes,
         filteredDishes: state.filteredDishes,
         current: state.current,
+        error: state.error,
+        getDishes,
         addDish,
         deleteDish,
         searchDish,

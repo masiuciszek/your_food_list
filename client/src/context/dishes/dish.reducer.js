@@ -7,10 +7,17 @@ import {
   CLEAR_CURRENT,
   UPDATE_DISH,
   CLEAR_FILTER,
+  DISH_ERROR,
 } from '../types';
 
 export default (state, { type, payload }) => {
   switch (type) {
+    case GET_DISHES:
+      return {
+        ...state,
+        dishes: payload,
+        loading: false,
+      };
     case ADD_DISH:
       return {
         ...state,
@@ -57,7 +64,11 @@ export default (state, { type, payload }) => {
         ),
         loading: false,
       };
-
+    case DISH_ERROR:
+      return {
+        ...state,
+        error: payload,
+      };
     default:
       return state;
   }
