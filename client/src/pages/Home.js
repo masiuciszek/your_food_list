@@ -58,6 +58,7 @@ const HomePage = () => {
   const [showSearch, toggleFn] = useToggle(false);
   const text = useRef('');
 
+  console.log(filteredDishes);
   useEffect(() => {
     if (filteredDishes === null) {
       text.current.value = '';

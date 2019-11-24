@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../../context/auth/auth.state';
 import { StyledForm, FormGroup, StyledInput } from '../dishes/DishForm';
 import { StyledBtn } from '../styled/Buttons';

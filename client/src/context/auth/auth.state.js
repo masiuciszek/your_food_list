@@ -2,7 +2,7 @@ import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import authReducer from './auth.reducer';
-import { REGISTER_FAIL, REGISTER_SUCCESS } from '../types';
+import { REGISTER_FAIL, REGISTER_SUCCESS, CLEAR_ERRORS } from '../types';
 
 export const AuthContext = createContext();
 
@@ -36,6 +36,10 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const clearErrors = () => {
+    dispatch({ type: CLEAR_ERRORS });
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -47,6 +51,7 @@ const AuthProvider = ({ children }) => {
         loadUser,
         login,
         register,
+        clearErrors,
       }}
     >
       {children}
