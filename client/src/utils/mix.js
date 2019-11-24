@@ -1,5 +1,6 @@
 import uuid from 'uuid/v4';
 import React from 'react';
+import { keyframes } from 'styled-components';
 
 import {
   Twitter,
@@ -7,6 +8,17 @@ import {
   Codepen,
   Facebook,
 } from 'styled-icons/boxicons-logos';
+
+export const fadeDown = keyframes`
+0% {
+  opacity:0;
+  transform:  translate(0px,-25px)  ;
+}
+100% {
+  opacity:1;
+  transform:  translate(0px,0px)  ;
+}
+`;
 
 export const links = [
   {
