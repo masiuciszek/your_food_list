@@ -106,7 +106,7 @@ const MobileList = styled.ul`
 
 
 const Navbar: React.FC<Props> = () => {
-  const { user, isAuth } = React.useContext(UserStore);
+  const { user, isAuth, logout } = React.useContext(UserStore);
   const [showMobileNav, toggleMobileNav] = useToggle(false);
   return (
 
@@ -137,7 +137,7 @@ const Navbar: React.FC<Props> = () => {
       )}
       <StyledNavigationList>
 
-        {navigationLinks.map((link, i) => (
+        {navigationLinks.map((link, i: number) => (
           <li key={i}>
             <Link to={link.path}>
               {' '}
@@ -146,6 +146,7 @@ const Navbar: React.FC<Props> = () => {
             </Link>
           </li>
         ))}
+        <span onClick={() => logout()}>Logout</span>
       </StyledNavigationList>
       {' '}
     </StyledNav>

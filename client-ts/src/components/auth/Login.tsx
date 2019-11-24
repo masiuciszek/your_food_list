@@ -6,7 +6,7 @@ import { BtnPrimary } from '../styled/Buttons';
 import { theme } from '../styled/GlobalStyles';
 
 interface ChildComponentProps extends RouteComponentProps<any> {
-
+  history: React.ReactNode;
 }
 
 
@@ -16,7 +16,6 @@ const Login: React.FC<ChildComponentProps> = (props) => {
     email: '',
     password: '',
   });
-
 
 
   const {
@@ -34,7 +33,7 @@ const Login: React.FC<ChildComponentProps> = (props) => {
       alert('please enter the fields');
     } else {
       login({ email, password });
-      props.history.push('/');
+      // props.history.push('/');
       setFormData({
         email: '',
         password: '',

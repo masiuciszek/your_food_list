@@ -36,7 +36,14 @@ export default (state: IStateUsers, action: IAction): IStateUsers => {
         user: null,
         error: action.payload,
       };
-
+    case EContextActionTypes.LOG_OUT:
+      return {
+        ...state,
+        isAuth: false,
+        token: null,
+        loading: false,
+        user: null,
+      };
     case EContextActionTypes.SET_LOADING:
       return {
         ...state,

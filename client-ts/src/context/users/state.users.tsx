@@ -25,9 +25,6 @@ export const UserStore = React.createContext<IStateUsers | any>(initialState);
 const UserProvider: React.FC = ({ children }): JSX.Element => {
   const [state, dispatch] = React.useReducer(userReducer, initialState);
 
-  const setLoading = () => {
-    dispatch({ type: EContextActionTypes.SET_LOADING });
-  };
 
   const loadUser = async () => {
     if (localStorage.token) {
@@ -74,6 +71,12 @@ const UserProvider: React.FC = ({ children }): JSX.Element => {
     }
   };
 
+  const logout = () => {
+    dispatch({
+      type: EContextActionTypes.LOG_OUT,
+    });
+  };
+
   return (
     <UserStore.Provider value={{
       users: state.users,
@@ -85,6 +88,8 @@ const UserProvider: React.FC = ({ children }): JSX.Element => {
       getUsers,
       loadUser,
       login,
+
+      logout,
     }}
     >
       {children}
