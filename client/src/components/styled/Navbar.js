@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { links } from '../../utils/mix';
+import { AuthContext } from '../../context/auth/auth.state';
 
 const StyledNavbar = styled.nav`
   padding: 1rem;
@@ -12,6 +13,9 @@ const StyledNavbar = styled.nav`
   justify-content: space-between;
   align-items: center;
   .title {
+    span {
+      color: ${({ theme }) => theme.primaryColor};
+    }
     a {
       color: ${props => props.theme.white};
       h4 {
@@ -36,10 +40,12 @@ export const NavList = styled.ul`
     &:hover {
       transform: scale(1.06);
     }
-    a {
+    a,
+    span {
       color: ${props => props.theme.white};
       transition: ${props => props.theme.mainTransition};
       text-transform: uppercase;
+      cursor: pointer;
       &:hover {
         color: ${props => props.theme.primaryColor};
         border-bottom: 1px solid ${props => props.theme.white};
@@ -49,10 +55,16 @@ export const NavList = styled.ul`
 `;
 
 const Navbar = () => {
-  let a;
+  const { isAuth, user, loading, logout } = React.useContext(AuthContext);
   return (
     <StyledNavbar>
       <div className="title">
+        {isAuth && (
+          <h4>
+            Welcome <span>Mr. </span>
+            {user && user.lastName}
+          </h4>
+        )}
         <Link to="/">
           <h4>
             Food <span>For</span> You
@@ -66,6 +78,28 @@ const Navbar = () => {
             <Link to={link.path}> {link.text} </Link>{' '}
           </li>
         ))}
+        {isAuth && (
+          <>
+            <li>
+              {' '}
+              <Link to="/user-profile">Profile</Link>{' '}
+            </li>
+            <li>
+              {' '}
+              <span onClick={() => logout()}>Logout</span>{' '}
+            </li>
+          </>
+        )}
+        {!isAuth && !loading && (
+          <>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </>
+        )}
       </NavList>
     </StyledNavbar>
   );

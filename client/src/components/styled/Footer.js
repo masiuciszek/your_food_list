@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { links, iconsList } from '../../utils/mix';
 import { NavList } from './Navbar';
+import { AuthContext } from '../../context/auth/auth.state';
 
 const StyledFooter = styled.footer`
   padding: 1rem;
@@ -45,14 +46,13 @@ const IconsGroup = styled.ul`
       text-transform: uppercase;
       &:hover {
         color: ${props => props.theme.primaryColor};
-
       }
     }
   }
 `;
 
 const Footer = () => {
-  let a;
+  const { isAuth, loading } = React.useContext(AuthContext);
   return (
     <StyledFooter>
       <div className="title">
@@ -70,6 +70,16 @@ const Footer = () => {
             <Link to={link.path}> {link.text} </Link>{' '}
           </li>
         ))}
+        {!isAuth && !loading && (
+          <>
+            <li>
+              <Link to="register">Register</Link>
+            </li>{' '}
+            <li>
+              <Link to="login">Login</Link>
+            </li>{' '}
+          </>
+        )}
       </NavList>
       <IconsGroup>
         {iconsList.map(icon => (
