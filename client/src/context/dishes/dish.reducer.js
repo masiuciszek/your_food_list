@@ -6,6 +6,7 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_DISH,
+  CLEAR_FILTER,
 } from '../types';
 
 export default (state, { type, payload }) => {
@@ -31,6 +32,11 @@ export default (state, { type, payload }) => {
         }),
         loading: false,
       };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filteredDishes: null,
+      };
     case SET_CURRENT:
       return {
         ...state,
@@ -51,6 +57,7 @@ export default (state, { type, payload }) => {
         ),
         loading: false,
       };
+
     default:
       return state;
   }

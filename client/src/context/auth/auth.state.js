@@ -1,40 +1,102 @@
-import React, { createContext, useReducer } from 'react';
-import PropTypes from 'prop-types';
+import React, { useReducer, createContext } from 'react';
 import axios from 'axios';
 import authReducer from './auth.reducer';
-import { REGISTER_FAIL, REGISTER_SUCCESS } from '../types';
+import setAuthToken from '../../utils/setAuthToken';
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  AUTH_ERROR,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+  LOGOUT,
+  CLEAR_ERRORS,
+} from '../types';
 
 export const AuthContext = createContext();
 
-const AuthProvider = ({ children }) => {
+const AuthProvider = props => {
   const initialState = {
     token: localStorage.getItem('token'),
-    isAuth: false,
+    isAuth: null,
     loading: true,
-    error: null,
     user: null,
+    error: null,
   };
+
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const loadUser = () => {};
-  const login = () => {};
+  // Load User
+  const loadUser = async () => {
+    setAuthToken(localStorage.token);
 
+    try {
+      const res = await axios.get('/auth');
+
+      dispatch({
+        type: USER_LOADED,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({ type: AUTH_ERROR });
+    }
+  };
+
+  // Register User
   const register = async formData => {
     const config = {
       headers: {
         'Content-Type': 'application/json',
       },
     };
+
     try {
       const res = await axios.post('/users', formData, config);
+
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,
       });
+
+      loadUser();
     } catch (err) {
-      dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg,
+      });
     }
   };
+
+  // Login User
+  const login = async formData => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+
+    try {
+      const res = await axios.post('/auth', formData, config);
+
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data,
+      });
+
+      loadUser();
+    } catch (err) {
+      dispatch({
+        type: LOGIN_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Logout
+  const logout = () => dispatch({ type: LOGOUT });
+
+  // Clear Errors
+  const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   return (
     <AuthContext.Provider
@@ -42,18 +104,18 @@ const AuthProvider = ({ children }) => {
         token: state.token,
         isAuth: state.isAuth,
         loading: state.loading,
-        error: state.error,
         user: state.user,
+        error: state.error,
+        register,
         loadUser,
         login,
-        register,
+        logout,
+        clearErrors,
       }}
     >
-      {children}
+      {props.children}
     </AuthContext.Provider>
   );
 };
-
-AuthProvider.propTypes = {};
 
 export default AuthProvider;

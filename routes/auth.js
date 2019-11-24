@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const config = require('config');
 const authMiddleware = require('../middleware/authMiddleware');
 const User = require('../models/User');
+const Dish = require('../models/Dish');
 
 // @route     GET /auth
 // @desc      Get logged in user
@@ -17,7 +18,7 @@ router.get('/', authMiddleware, async (req, res) => {
     res.json(user);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server error, Status 500');
+    res.status(500).send('Server Error');
   }
 });
 
@@ -31,25 +32,28 @@ router.post(
     check('password', 'Password is required').exists(),
   ],
   async (req, res) => {
-    const validationErrors = validationResult(req);
-    if (!validationErrors.isEmpty()) {
-      return res.status(400).json({ errors: validationErrors.array() });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
     }
+
     const { email, password } = req.body;
 
     try {
       const user = await User.findOne({ email });
+
       if (!user) {
-        return res.status(400).json({ msg: 'Invalid Values' });
+        return res.status(400).json({ msg: 'Invalid Credentials' });
       }
+
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).json({ msg: 'Authentication Error' });
+        return res.status(400).json({ msg: 'Invalid Credentials' });
       }
+
       const payload = {
         user: {
-          // comes from user id
           id: user.id,
         },
       };
@@ -57,19 +61,39 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 360000 },
+        {
+          expiresIn: 360000,
+        },
         (err, token) => {
-          if (err) {
-            throw new Error(err);
-          }
+          if (err) throw err;
           res.json({ token });
         }
       );
     } catch (err) {
       console.error(err.message);
-      res.status(500).send('Server error, Status 500');
+      res.status(500).send('Server Error');
     }
   }
 );
+
+// @route     /auth
+// @desc      Delete User
+// @access    Private
+
+router.delete('/', authMiddleware, async (req, res) => {
+  try {
+    if (!req.user.id) {
+      return res.status(404).json({ msg: 'user does not exists!' });
+    }
+    await Dish.deleteMany({ user: req.user.id });
+    // Remove user
+    await User.findOneAndRemove({ _id: req.user.id });
+
+    res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

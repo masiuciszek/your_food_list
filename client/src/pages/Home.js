@@ -7,6 +7,56 @@ import Dishes from '../components/dishes/Dishes';
 import DishForm, { StyledInput } from '../components/dishes/DishForm';
 import useToggle from '../hooks/useToggle';
 import { DishContext } from '../context/dishes/dish.state';
+import { AuthContext } from '../context/auth/auth.state';
+
+const HomePage = () => {
+  const { searchDish, clearFilter, filteredDishes } = React.useContext(
+    DishContext
+  );
+
+  const { loadUser } = React.useContext(AuthContext);
+  const [showSearch, toggleFn] = useToggle(false);
+  const text = useRef('');
+
+  useEffect(() => {
+    loadUser();
+    if (filteredDishes === null) {
+      text.current.value = '';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleChange = e => {
+    if (text.current.value !== '') {
+      searchDish(e.target.value);
+    } else {
+      clearFilter();
+    }
+  };
+
+  return (
+    <>
+      <Center showSearch={showSearch}>
+        <span className="icon" onClick={toggleFn}>
+          <Search width="25" />{' '}
+        </span>
+        <StyledInput
+          type="text"
+          className="search"
+          placeholder="search"
+          onChange={handleChange}
+          ref={text}
+        />
+        <HomeWrapper>
+          <DishForm search={showSearch} closeSearchInput={toggleFn} />
+          <Dishes />
+        </HomeWrapper>
+      </Center>
+    </>
+  );
+};
+
+HomePage.propTypes = {};
 
 const Center = styled.div`
   display: flex;
@@ -51,52 +101,8 @@ const HomeWrapper = styled.section`
     grid-gap: 2rem;
   }
 `;
-const HomePage = () => {
-  const { searchDish, clearFilter, filteredDishes } = React.useContext(
-    DishContext
-  );
-  const [showSearch, toggleFn] = useToggle(false);
-  const text = useRef('');
 
-  useEffect(() => {
-    if (filteredDishes === null) {
-      text.current.value = '';
-    }
-  });
-
-  const handleChange = e => {
-    if (text.current.value !== '') {
-      searchDish(e.target.value);
-    } else {
-      clearFilter();
-    }
-  };
-
-  return (
-    <>
-      <Center showSearch={showSearch}>
-        <span className="icon" onClick={toggleFn}>
-          <Search width="25" />{' '}
-        </span>
-        <StyledInput
-          type="text"
-          className="search"
-          placeholder="search"
-          onChange={handleChange}
-          ref={text}
-        />
-        <HomeWrapper>
-          <DishForm search={showSearch} closeSearchInput={toggleFn} />
-          <Dishes />
-        </HomeWrapper>
-      </Center>
-    </>
-  );
-};
-
-HomePage.propTypes = {};
 HomeWrapper.propTypes = {
   showSearch: PropTypes.bool,
 };
-
 export default HomePage;

@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { withRouter } from 'react-router-dom';
 import { AuthContext } from '../../context/auth/auth.state';
 import { StyledForm, FormGroup, StyledInput } from '../dishes/DishForm';
 import { StyledBtn } from '../styled/Buttons';
 import { AlertContext } from '../../context/alert/alert.state';
 
 export const RegisterStyled = styled.section`
-  /* TODO: DELETE BORDER */
-  border: 2px solid red;
   width: 100%;
   margin: 0 auto;
   display: flex;
@@ -22,7 +21,7 @@ export const RegisterStyled = styled.section`
     margin: 0 auto;
     padding: 1rem 0;
     box-shadow: ${({ theme }) => theme.lightShadow};
-    background: ${({ theme }) => theme.blackShadow};
+    border: 2px solid ${({ theme }) => theme.black};
     width: 80%;
     input,
     button {
@@ -38,8 +37,8 @@ export const RegisterStyled = styled.section`
   }
 `;
 
-const Register = () => {
-  const { register } = useContext(AuthContext);
+const Register = props => {
+  const { register, error, clearErrors, isAuth } = useContext(AuthContext);
   const { setAlert } = useContext(AlertContext);
   const [user, setUser] = useState({
     firstName: '',
@@ -50,6 +49,17 @@ const Register = () => {
   });
 
   const { firstName, lastName, email, password, password2 } = user;
+
+  useEffect(() => {
+    if (isAuth) {
+      props.history.push('/');
+    }
+    if (error) {
+      setAlert(error, 'warning');
+      clearErrors();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, isAuth, props.history]);
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -70,8 +80,6 @@ const Register = () => {
         email,
         password,
       });
-      // TODO:DELETE
-      console.log('Registered!');
     }
   };
 
@@ -139,6 +147,8 @@ const Register = () => {
   );
 };
 
-Register.propTypes = {};
+Register.propTypes = {
+  history: PropTypes.object,
+};
 
-export default Register;
+export default withRouter(Register);
