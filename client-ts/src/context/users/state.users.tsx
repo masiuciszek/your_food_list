@@ -88,7 +88,6 @@ const UserProvider: React.FC = ({ children }): JSX.Element => {
       getUsers,
       loadUser,
       login,
-
       logout,
     }}
     >
