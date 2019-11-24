@@ -14,10 +14,11 @@ const User = require('../models/User');
  * @desc Get all user dishes
  * @access Private
  */
-
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const dishes = await Dish.find({ user: req.user.id }).sort({ date: -1 });
+
+    if (!dishes) return res.status(401).json({ msg: 'Authentication denied' });
     res.json(dishes);
   } catch (err) {
     console.error(err.message);
@@ -49,10 +50,13 @@ router.post(
     if (!validationErrors.isEmpty()) {
       return res.status(400).json({ errors: validationErrors.array() });
     }
-    const { name, country, description } = req.body;
+    const { name, country, description, type } = req.body;
     try {
       const newDish = await Dish({
-        ...req.body,
+        name,
+        country,
+        description,
+        type,
         user: req.user.id,
       });
 

@@ -38,7 +38,7 @@ export const RegisterStyled = styled.section`
 `;
 
 const Register = props => {
-  const { register, error, clearErrors } = useContext(AuthContext);
+  const { register, error, clearErrors, isAuth } = useContext(AuthContext);
   const { setAlert } = useContext(AlertContext);
   const [user, setUser] = useState({
     firstName: '',
@@ -51,12 +51,15 @@ const Register = props => {
   const { firstName, lastName, email, password, password2 } = user;
 
   useEffect(() => {
+    if (isAuth) {
+      props.history.push('/');
+    }
     if (error) {
       setAlert(error, 'warning');
       clearErrors();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error]);
+  }, [error, isAuth, props.history]);
 
   const handleChange = e => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -77,8 +80,6 @@ const Register = props => {
         email,
         password,
       });
-
-      // return props.history.push('/');
     }
   };
 

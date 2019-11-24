@@ -12,6 +12,11 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import AlertProvider from './context/alert/alert.state';
 import Alert from './components/alert/Alert';
+import setAuthToken from './utils/setAuthToken';
+
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
+}
 
 const App = () => (
   <AuthProvider>
