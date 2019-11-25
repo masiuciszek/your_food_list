@@ -65,11 +65,19 @@ const DishProvider = ({ children }) => {
     }
   };
 
-  const deleteDish = id => {
-    dispatch({
-      type: DELETE_DISH,
-      payload: id,
-    });
+  const deleteDish = async id => {
+    try {
+      await axios.delete(`/dishes/${id}`);
+      dispatch({
+        type: DELETE_DISH,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: DISH_ERROR,
+        payload: err.response,
+      });
+    }
   };
 
   const setCurrent = dish => {

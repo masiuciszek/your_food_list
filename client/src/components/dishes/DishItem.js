@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { PizzaSlice, Edit } from 'styled-icons/fa-solid';
@@ -75,11 +75,23 @@ const Label = styled.div`
 `;
 
 const DishItem = ({ dish }) => {
-  const { deleteDish, setCurrent, clearCurrent } = useContext(DishContext);
-  const { name, country, type, description, id } = dish;
+  const {
+    deleteDish,
+    setCurrent,
+    clearCurrent,
+    getDishes,
+    dishes,
+  } = useContext(DishContext);
+  const { name, country, type, description, _id } = dish;
+
+  useEffect(() => {
+    getDishes();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dishes]);
 
   const handleDelete = () => {
-    deleteDish(id);
+    deleteDish(_id);
     clearCurrent();
   };
 
@@ -122,7 +134,7 @@ DishItem.propTypes = {
   dish: PropTypes.shape({
     name: PropTypes.string,
     country: PropTypes.string,
-    id: PropTypes.string,
+    _id: PropTypes.string,
     type: PropTypes.string,
     description: PropTypes.string,
   }),
