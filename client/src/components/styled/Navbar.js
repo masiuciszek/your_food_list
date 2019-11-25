@@ -6,10 +6,18 @@ import { Menu } from 'styled-icons/icomoon';
 import { links, fadeDown } from '../../utils/mix';
 import { AuthContext } from '../../context/auth/auth.state';
 import useToggle from '../../hooks/useToggle';
+import { DishContext } from '../../context/dishes/dish.state';
 
 const Navbar = () => {
   const { isAuth, user, loading, logout } = React.useContext(AuthContext);
+  const { clearDishes } = React.useContext(DishContext);
   const [showMenu, toggleMenu] = useToggle(false);
+
+  const handleLogout = () => {
+    logout();
+    clearDishes();
+  };
+
   return (
     <StyledNavbar higher={showMenu}>
       <div className="title">
@@ -43,7 +51,7 @@ const Navbar = () => {
             </li>
             <li>
               {' '}
-              <span onClick={() => logout()}>Logout</span>{' '}
+              <span onClick={handleLogout}>Logout</span>{' '}
             </li>
           </>
         )}

@@ -8,6 +8,7 @@ import {
   UPDATE_DISH,
   CLEAR_FILTER,
   DISH_ERROR,
+  CLEAR_DISHES,
 } from '../types';
 
 export default (state, { type, payload }) => {
@@ -48,19 +49,25 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         current: payload,
-        loading: false,
       };
     case CLEAR_CURRENT:
       return {
         ...state,
         current: null,
-        loading: false,
+      };
+    case CLEAR_DISHES:
+      return {
+        ...state,
+        dishes: null,
+        filteredDishes: null,
+        error: null,
+        current: null,
       };
     case UPDATE_DISH:
       return {
         ...state,
         dishes: state.dishes.map(dish =>
-          dish.id === payload.id ? payload : dish
+          dish._id === payload._id ? payload : dish
         ),
         loading: false,
       };
@@ -68,6 +75,7 @@ export default (state, { type, payload }) => {
       return {
         ...state,
         error: payload,
+        loading: false,
       };
     default:
       return state;

@@ -14,6 +14,7 @@ import {
   UPDATE_DISH,
   DISH_ERROR,
   GET_DISHES,
+  CLEAR_DISHES,
 } from '../types';
 
 export const DishContext = React.createContext();
@@ -101,11 +102,23 @@ const DishProvider = ({ children }) => {
     dispatch({ type: CLEAR_FILTER });
   };
 
-  const updateDish = dish => {
-    dispatch({
-      type: UPDATE_DISH,
-      payload: dish,
-    });
+  const updateDish = async dish => {
+    try {
+      const res = await axios.put(`/dishes/${dish._id}`);
+      dispatch({
+        type: UPDATE_DISH,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: DISH_ERROR,
+        payload: err.response,
+      });
+    }
+  };
+
+  const clearDishes = () => {
+    dispatch({ type: CLEAR_DISHES });
   };
 
   return (
@@ -123,6 +136,7 @@ const DishProvider = ({ children }) => {
         setCurrent,
         clearCurrent,
         updateDish,
+        clearDishes,
       }}
     >
       {children}

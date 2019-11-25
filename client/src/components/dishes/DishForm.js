@@ -98,7 +98,7 @@ const DishForm = ({ search, closeSearchInput }) => {
             value={description}
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="btn-group">
           <StyledBtn type="submit">
             {!current ? 'Add new dish' : 'Update dish'}
           </StyledBtn>
@@ -135,12 +135,27 @@ const DishFormWrapper = styled.div`
   }
 
   input {
-    width: 100%;
+    /* width: 100%; */
+    width: 30rem;
   }
 
   @media (max-width: 1106px) {
     input {
-      width: 100%;
+      /* width: 100%; */
+      width: 25rem;
+    }
+  }
+  @media (max-width: 440px) {
+    input {
+      width: 20rem;
+    }
+    .btn-group {
+      display: flex;
+      button {
+        width: 7rem;
+        font-size: 0.8rem;
+        padding: 0.3rem;
+      }
     }
   }
 `;

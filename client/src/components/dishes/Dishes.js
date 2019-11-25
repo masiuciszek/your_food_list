@@ -16,7 +16,9 @@ const Dishes = () => {
   }, []);
   return (
     <StyledDish>
-      {!dishes && <h3>Please Add som e dishes</h3>}
+      {dishes !== null && dishes.length === 0 && !loading && (
+        <h3>Please Add some dishes</h3>
+      )}
       {dishes !== null && !loading ? (
         <>
           {filteredDishes !== null

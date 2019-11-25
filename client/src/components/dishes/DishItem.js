@@ -75,20 +75,16 @@ const Label = styled.div`
 `;
 
 const DishItem = ({ dish }) => {
-  const {
-    deleteDish,
-    setCurrent,
-    clearCurrent,
-    getDishes,
-    dishes,
-  } = useContext(DishContext);
+  const { deleteDish, setCurrent, clearCurrent, getDishes } = useContext(
+    DishContext
+  );
   const { name, country, type, description, _id } = dish;
 
   useEffect(() => {
     getDishes();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dishes]);
+  }, []);
 
   const handleDelete = () => {
     deleteDish(_id);
