@@ -22,13 +22,13 @@ export default (state, { type, payload }) => {
     case ADD_DISH:
       return {
         ...state,
-        dishes: [...state.dishes, payload],
+        dishes: [payload, ...state.dishes],
         loading: false,
       };
     case DELETE_DISH:
       return {
         ...state,
-        dishes: state.dishes.filter(dish => dish.id !== payload),
+        dishes: state.dishes.filter(dish => dish._id !== payload),
         loading: false,
       };
     case FILTER_DISH:

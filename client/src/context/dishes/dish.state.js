@@ -76,7 +76,7 @@ const DishProvider = ({ children }) => {
     } catch (err) {
       dispatch({
         type: DISH_ERROR,
-        payload: err.response,
+        payload: err.response.msg,
       });
     }
   };
@@ -103,8 +103,13 @@ const DishProvider = ({ children }) => {
   };
 
   const updateDish = async dish => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
     try {
-      const res = await axios.put(`/dishes/${dish._id}`);
+      const res = await axios.put(`/dishes/${dish._id}`, dish, config);
       dispatch({
         type: UPDATE_DISH,
         payload: res.data,

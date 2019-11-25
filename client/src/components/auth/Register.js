@@ -13,22 +13,30 @@ export const RegisterStyled = styled.section`
   display: flex;
   justify-content: center;
   flex-direction: column;
+
   h1 {
     text-align: center;
     text-transform: uppercase;
   }
   form {
     margin: 0 auto;
-    padding: 1rem 0;
+    border: 2px solid ${({ theme }) => theme.black};
+    padding: 3rem 0;
     box-shadow: ${({ theme }) => theme.lightShadow};
     width: 80%;
     input,
     button {
       display: block;
-      margin: 0.1rem auto;
+      margin: 0.7rem auto;
     }
+
     input {
-      width: 75%;
+      width: 55%;
+      padding: 0.7rem 1.1rem;
+      &:focus {
+        transform: scale(0.862, 0.95);
+        /* transform: skew(3deg, 2deg); */
+      }
     }
     button {
       width: 50%;
