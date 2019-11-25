@@ -11,6 +11,7 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   CLEAR_ERRORS,
+  REMOVE_USER,
 } from '../types';
 
 export const AuthContext = createContext();
@@ -99,6 +100,17 @@ const AuthProvider = props => {
   // Clear Errors
   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
+  const deleteProfile = async () => {
+    if (window.confirm('Are you sure? This can NOT be undone!')) {
+      try {
+        await axios.delete('/auth');
+        dispatch({ type: REMOVE_USER });
+      } catch (err) {
+        dispatch({ type: AUTH_ERROR, payload: err.message });
+      }
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -112,6 +124,7 @@ const AuthProvider = props => {
         login,
         logout,
         clearErrors,
+        deleteProfile,
       }}
     >
       {props.children}

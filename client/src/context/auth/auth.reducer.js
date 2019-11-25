@@ -1,6 +1,7 @@
 import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
+  REMOVE_USER,
   USER_LOADED,
   AUTH_ERROR,
   LOGIN_SUCCESS,
@@ -39,6 +40,14 @@ export default (state, action) => {
         loading: false,
         user: null,
         error: action.payload,
+      };
+    case REMOVE_USER:
+      return {
+        ...state,
+        token: null,
+        isAuth: false,
+        loading: false,
+        user: null,
       };
     case CLEAR_ERRORS:
       return {

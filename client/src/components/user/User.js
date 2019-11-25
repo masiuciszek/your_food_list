@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import Moment from 'react-moment';
 import { AuthContext } from '../../context/auth/auth.state';
 import { StyledBtn } from '../styled/Buttons';
+import Spinner from '../styled/Spinner';
 
 const StyledUser = styled.section`
   padding: 1rem 1.5rem;
@@ -30,7 +31,9 @@ const BtnGroup = styled.div`
 `;
 
 const User = props => {
-  const { user, loading, isAuth } = React.useContext(AuthContext);
+  const { user, loading, isAuth, deleteProfile } = React.useContext(
+    AuthContext
+  );
   return (
     <StyledUser>
       <h3>
@@ -44,16 +47,18 @@ const User = props => {
       </h3>
       <p>
         Joined at:{' '}
-        {!loading && user && (
+        {!loading && user ? (
           <span>
             {' '}
             <Moment format="MMMM Do YYYY,">{user.date}</Moment>
           </span>
+        ) : (
+          <Spinner />
         )}
       </p>
       <BtnGroup>
         <StyledBtn>Edit User</StyledBtn>
-        <StyledBtn>Delete User</StyledBtn>
+        <StyledBtn onClick={() => deleteProfile()}>Delete User</StyledBtn>
       </BtnGroup>
     </StyledUser>
   );
