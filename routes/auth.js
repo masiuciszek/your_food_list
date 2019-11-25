@@ -9,9 +9,11 @@ const authMiddleware = require('../middleware/authMiddleware');
 const User = require('../models/User');
 const Dish = require('../models/Dish');
 
-// @route     GET /auth
-// @desc      Get logged in user
-// @access    Private
+/**
+ * @route GET /auth
+ * @desc get logged in user
+ * @access Private
+ */
 router.get('/', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
@@ -22,9 +24,11 @@ router.get('/', authMiddleware, async (req, res) => {
   }
 });
 
-// @route     post /auth
-// @desc      login
-// @access    public
+/**
+ * @route POST /auth
+ * @desc LOGIN
+ * @access Private
+ */
 router.post(
   '/',
   [
@@ -76,9 +80,39 @@ router.post(
   }
 );
 
-// @route     /auth
-// @desc      Delete User
-// @access    Private
+/**
+ * @route PUT auth/id
+ * @desc update user
+ * @access Private
+ */
+router.put('/:id', authMiddleware, async (req, res) => {
+  const { firstName, lastName, email } = req.body;
+  const userFields = {};
+  if (firstName) userFields.firstName = firstName;
+  if (lastName) userFields.lastName = lastName;
+  if (email) userFields.email = email;
+  try {
+    let user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(400).json({ msg: 'user not found' });
+    }
+    user = await User.findByIdAndUpdate(
+      req.params.id,
+      { $set: userFields },
+      { new: true }
+    );
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+/**
+ * @route Delete auth
+ * @desc delete user
+ * @access Private
+ */
 
 router.delete('/', authMiddleware, async (req, res) => {
   try {
