@@ -5,6 +5,7 @@ const theme: DefaultTheme = {
   shadow: {
     lightShadow: '2px 5px 3px 0px rgba(42, 72, 88, 0.5)',
     darkShadow: '4px 10px 5px 0px rgba(42, 72, 88, 0.5)',
+    blackShadow: '4px 10px 5px 0px rgba(2, 2, 8, 0.5)',
   },
   colors: {
     secondary: '#23aa8f',
