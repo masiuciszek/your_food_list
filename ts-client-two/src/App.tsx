@@ -3,7 +3,7 @@ import Layout from './components/Layout';
 import AppWrapper from './components/styled/AppWrapper';
 
 const App: React.FC = () => {
-  let a;
+  let sadas
   return (
     <Layout>
       <AppWrapper>
@@ -13,4 +13,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default App

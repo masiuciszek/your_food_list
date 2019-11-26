@@ -6,7 +6,6 @@ interface Props {
   children: JSX.Element[] | JSX.Element;
 
 }
-
 const Layout: React.FC<Props> = ({ children }) => (
   <ThemeProvider theme={theme}>
     <GlobalStyles />
