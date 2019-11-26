@@ -22,15 +22,12 @@ const StyledFooter = styled.footer`
 
 const FooterListLinks = styled(NavList)`
   padding: .4rem;
-
-  /* TODO:delete */
-  border: 2px solid white;
   justify-content: flex-start;
   li{
-    margin: 0 .7rem
+    margin: 0 .7rem;
     a{
       &:hover{
-        border: none;
+        border:none;
       }
     }
   }
@@ -38,12 +35,10 @@ const FooterListLinks = styled(NavList)`
 const FooterListIcons = styled(NavList)`
   padding: .4rem;
   display: flex;
-  /* TODO:delete */
-  border: 2px solid red;
   justify-content: flex-start;
   margin: .5rem 0;
   li{
-    margin: 0 .7rem
+    margin: 0 .7rem;
     a{
 
       &:hover{
@@ -57,8 +52,8 @@ const Footer: React.FC<Props> = () => (
   <StyledFooter>
     <FooterListLinks>
       {links.map((link) => (
-        <li>
-          <Link href={link.id} to={link.path}>
+        <li key={link.id}>
+          <Link to={link.path}>
             {link.text}
           </Link>
         </li>

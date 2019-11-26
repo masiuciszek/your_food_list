@@ -7,4 +7,9 @@ const AppWrapper = styled.div`
   min-height: 83vh;
 
 `;
+
+export const ComponentWrapper = styled.div`
+padding: 1rem;
+`;
+
 export default AppWrapper;

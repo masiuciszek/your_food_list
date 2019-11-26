@@ -86,5 +86,5 @@ interface EAuthActions {
 
 type IActionType = {
   type: string;
-  payload?: any;
+  payload?: object;
 }
