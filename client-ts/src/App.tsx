@@ -15,9 +15,8 @@ if (localStorage.token) {
 }
 
 const App: React.FC = () => {
-  let a;
+  let a
   return (
-
     <Layout>
         <AlertProvider>
           <Switch>
