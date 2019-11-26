@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const BtnPrimary = styled.button`
     padding: 0.4rem 0.9rem;
-  background-image: linear-gradient(to right, #222 50%, #fafa6e 50%);
+  background-image: linear-gradient(to right, #222 50%, #D9CB9E 50%);
   background-position: 0;
   background-size: 200%;
   transition: all 0.4s;
