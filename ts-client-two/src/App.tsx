@@ -1,18 +1,23 @@
 import React from 'react';
+import { Route, Switch } from 'react-router-dom';
 import Layout from './components/Layout';
 import AppWrapper from './components/styled/AppWrapper';
-import {Route,Switch} from 'react-router-dom'
+import DishProvider from './context/dishes/dish.state';
+import HomePage from './pages/homepage';
 
 const App: React.FC = () => {
-  let sadas
+  let sadas;
   return (
-    <Layout>
-      <AppWrapper>
-        <h1>App</h1>
-
-      </AppWrapper>
-    </Layout>
+    <DishProvider>
+      <Layout>
+        <AppWrapper>
+          <Switch>
+            <Route path="/" component={HomePage} />
+          </Switch>
+        </AppWrapper>
+      </Layout>
+    </DishProvider>
   );
 };
 
-export default App
+export default App;
