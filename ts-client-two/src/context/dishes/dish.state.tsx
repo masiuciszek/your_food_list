@@ -2,9 +2,9 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import uuid from 'uuid/v4';
-import { string } from 'prop-types';
+import contextActions from '../contextTypes';
 import DishReducer from './Dish.reducer';
-
+import { IStateDishes, Dish } from '../../types';
 
 interface Props {
   children: JSX.Element[] | JSX.Element;
@@ -39,7 +39,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
 
   const addDish = (newDish: Dish) => {
     dispatch({
-      type: EContextDishesActions.ADD_DISH,
+      type: contextActions.dishes.ADD_DISH,
       payload: newDish,
     });
   };

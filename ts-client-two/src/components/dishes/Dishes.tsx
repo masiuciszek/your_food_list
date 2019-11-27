@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DishContext } from '../../context/dishes/dish.state';
 import DishItem from './DishItem';
+import { Dish } from '../../types';
 
 interface Props {
 

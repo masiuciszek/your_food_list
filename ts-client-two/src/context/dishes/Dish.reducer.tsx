@@ -1,11 +1,15 @@
 /* eslint-disable no-undef */
+import contextActions, { ADD_DISH, SET_CURRENT, GET_DISHES } from '../contextTypes';
+import { IStateDishes, IActionType } from '../../types';
+
+
 export default (state: IStateDishes, action: IActionType) => {
   switch (action.type) {
-    case EContextDishesActions.GET_DISHES:
+    case contextActions.dishes.GET_DISHES:
       return {
         ...state,
       };
-    case EContextDishesActions.ADD_DISH:
+    case contextActions.dishes.ADD_DISH:
       return {
         ...state,
         dishes: [...state.dishes, action.payload],

@@ -8,7 +8,7 @@ type Link = {
   text: string;
 }
 
-type IStateDishes = {
+export type IStateDishes = {
   dishes: Dish[];
   error: null;
   loading: boolean;
@@ -25,7 +25,7 @@ type IStateAuth = {
   error: null;
 }
 
-type Dish = {
+export type Dish = {
   id: string;
   name: string;
   country: string;
@@ -33,7 +33,7 @@ type Dish = {
   type: string;
 }
 
-type User = {
+export type User = {
   id: string;
   firstName: string;
   lastName: string;
@@ -75,17 +75,27 @@ enum EContextAuthActions {
   LOG_OUT = 'LOG_OUT'
 }
 
-interface EDishActions {
+export interface EDishActions {
   type: EContextDishesActions;
 }
 
 
-interface EAuthActions {
+export interface EAuthActions {
   type: EContextAuthActions;
 }
 
 
-type IActionType = {
+export type IActionType = {
   type: string;
   payload?: any;
+}
+
+export interface DefaultActionsTypes {
+  dishes: {
+    GET_DISHES: string;
+    DELETE_DISH: string;
+    SET_CURRENT: string;
+    ADD_DISH: string;
+    UPDATE_DISH: string;
+  };
 }

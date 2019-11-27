@@ -63,7 +63,7 @@ const DishForm: React.FC<Props> = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(formData);
+    addDish(formData);
   };
   return (
     <>
