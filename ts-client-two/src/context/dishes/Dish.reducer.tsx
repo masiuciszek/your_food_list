@@ -27,6 +27,12 @@ export default (state: IStateDishes, action: IActionType) => {
         ...state,
         current: payload,
       };
+    case contextActions.dishes.UPDATE_DISH:
+      return {
+        ...state,
+        dishes: state.dishes.map((dish) => (dish.id === payload.id ? payload : dish)),
+        loading: false,
+      };
     default:
       return state;
   }

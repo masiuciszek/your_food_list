@@ -6,6 +6,75 @@ import { DishContext } from '../../context/dishes/dish.state';
 interface Props {
 
 }
+
+
+const DishForm: React.FC<Props> = () => {
+  const { addDish, current, updateDish } = React.useContext(DishContext);
+
+  const [formData, setFormData] = React.useState({
+    name: '',
+    country: '',
+    type: 'main',
+    description: '',
+  });
+  const {
+    name, country, type, description,
+  } = formData;
+
+
+  React.useEffect(() => {
+    if (current !== null) {
+      setFormData(current);
+    } else {
+      setFormData({
+        name: '',
+        type: 'main',
+        country: '',
+        description: '',
+      });
+    }
+  }, [current, DishContext]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { value, name } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (current) {
+      updateDish(formData);
+    } else {
+      addDish(formData);
+    }
+  };
+  return (
+    <>
+      <StyledForm onSubmit={handleSubmit}>
+        <FormGroup>
+          <StyledInput type="text" placeholder="name" name="name" value={name} onChange={handleChange} />
+        </FormGroup>
+        <FormGroup>
+          <StyledInput type="text" placeholder="country" name="country" value={country} onChange={handleChange} />
+        </FormGroup>
+        <FormGroup>
+          <StyledSelect value={type} onChange={handleChange} name="type">
+            <option disabled>Choose your dish type</option>
+            <option value="breakfast">breakfast</option>
+            <option value="snack">snack</option>
+            <option value="snack">snack</option>
+            <option value="dessert">dessert</option>
+          </StyledSelect>
+        </FormGroup>
+        <FormGroup>
+          <StyledInput type="text" placeholder="description" name="description" onChange={handleChange} value={description} />
+        </FormGroup>
+        <FormGroup><BtnPrimary>Add new Dish</BtnPrimary></FormGroup>
+      </StyledForm>
+    </>
+  );
+};
+
 const StyledForm = styled.form`
   padding: 1rem;
   align-self:center;
@@ -43,67 +112,4 @@ const StyledSelect = styled.select`
   border: 2px solid orange;
 `;
 
-
-const DishForm: React.FC<Props> = () => {
-  const { addDish, current } = React.useContext(DishContext);
-
-  const [formData, setFormData] = React.useState({
-    name: '',
-    country: '',
-    type: 'main',
-    description: '',
-  });
-  const {
-    name, country, type, description,
-  } = formData;
-
-
-  React.useEffect(() => {
-    if (current !== null) {
-      setFormData(current);
-    } else {
-      setFormData({
-        name: '',
-        type: 'main',
-        country: '',
-        description: '',
-      });
-    }
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { value, name } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    addDish(formData);
-  };
-  return (
-    <>
-      <StyledForm onSubmit={handleSubmit}>
-        <FormGroup>
-          <StyledInput type="text" placeholder="name" name="name" value={name} onChange={handleChange} />
-        </FormGroup>
-        <FormGroup>
-          <StyledInput type="text" placeholder="country" name="country" value={country} onChange={handleChange} />
-        </FormGroup>
-        <FormGroup>
-          <StyledSelect value={type} onChange={handleChange} name="type">
-            <option disabled>Choose your dish type</option>
-            <option value="breakfast">breakfast</option>
-            <option value="snack">snack</option>
-            <option value="snack">snack</option>
-            <option value="dessert">dessert</option>
-          </StyledSelect>
-        </FormGroup>
-        <FormGroup>
-          <StyledInput type="text" placeholder="description" name="description" onChange={handleChange} value={description} />
-        </FormGroup>
-        <FormGroup><BtnPrimary>Add new Dish</BtnPrimary></FormGroup>
-      </StyledForm>
-    </>
-  );
-};
 export default DishForm;

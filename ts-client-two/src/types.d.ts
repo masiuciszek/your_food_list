@@ -17,6 +17,7 @@ export type IStateDishes = {
   addDish: any;
   deleteDish: any;
   setCurrent: any;
+  updateDish: any;
 }
 
 type IStateAuth = {
