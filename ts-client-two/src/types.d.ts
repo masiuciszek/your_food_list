@@ -15,6 +15,7 @@ export type IStateDishes = {
   flirtedDishes: null;
   current: null;
   addDish: any;
+  deleteDish: any;
 }
 
 type IStateAuth = {

@@ -3,6 +3,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { Edit2, Delete } from 'styled-icons/feather';
+import { Dish } from '../../types';
+import { DishContext } from '../../context/dishes/dish.state';
 
 interface Props {
   dish: Dish;
@@ -59,9 +61,13 @@ const CtaBtnStyled = styled.div`
 `;
 
 const DishItem: React.FC<Props> = ({ dish }) => {
+  const { deleteDish } = React.useContext(DishContext);
   const {
     id, name, description, country, type,
   } = dish;
+  const handleDelete = () => {
+    deleteDish(id);
+  };
 
   return (
     <StyledDish>
@@ -92,7 +98,7 @@ const DishItem: React.FC<Props> = ({ dish }) => {
         <span>
           <Edit2 size="35" />
         </span>
-        <span>
+        <span onClick={handleDelete}>
           <Delete size="35" />
         </span>
       </CtaBtnStyled>

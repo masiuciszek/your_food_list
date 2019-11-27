@@ -43,6 +43,13 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       payload: newDish,
     });
   };
+
+  const deleteDish = (id: string) => {
+    dispatch({
+      type: contextActions.dishes.DELETE_DISH,
+      payload: id,
+    });
+  };
   return (
     <DishContext.Provider value={{
       dishes: state.dishes,
@@ -51,6 +58,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       flirtedDishes: state.flirtedDishes,
       current: state.current,
       addDish,
+      deleteDish,
     }}
     >
       {children}

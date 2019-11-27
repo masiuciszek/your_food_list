@@ -4,7 +4,8 @@ import { IStateDishes, IActionType } from '../../types';
 
 
 export default (state: IStateDishes, action: IActionType) => {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case contextActions.dishes.GET_DISHES:
       return {
         ...state,
@@ -12,7 +13,14 @@ export default (state: IStateDishes, action: IActionType) => {
     case contextActions.dishes.ADD_DISH:
       return {
         ...state,
-        dishes: [...state.dishes, action.payload],
+        dishes: [...state.dishes, payload],
+        loading: false,
+      };
+    case contextActions.dishes.DELETE_DISH:
+      return {
+        ...state,
+        dishes: state.dishes.filter((dish) => dish.id !== payload),
+        loading: false,
       };
     default:
       return state;
