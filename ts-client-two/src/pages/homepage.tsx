@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Dishes from '../components/dishes/Dishes';
 import DishForm from '../components/dishes/DishForm';
 import { fadeDown } from '../utils/animation';
+import Search from '../components/dishes/Search';
 
 interface Props {
 
@@ -11,8 +12,6 @@ interface Props {
 const StyledGrid = styled.div`
   display: grid;
   grid-template-rows: auto;
-  /* TODO: Delete this */
-  border: 2px solid black;
   margin: 0 auto;
   padding: 1rem;
   min-height: 60vh;
@@ -37,7 +36,7 @@ const HomePage: React.FC<Props> = () => (
     >
     Add A Dish
     </h1>
-
+    <Search />
     <StyledGrid>
       <DishForm />
       <Dishes />

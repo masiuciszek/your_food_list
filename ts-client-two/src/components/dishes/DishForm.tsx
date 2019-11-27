@@ -88,10 +88,8 @@ const FormGroup = styled.div`
   padding: .5rem;
 
 `;
-const StyledInput = styled.input`
+export const StyledInput = styled.input`
   padding: .5rem .4rem;
-  /* TODO: */
-  border: 2px solid orange;
   width: 90%;
   border: 1px solid ${({ theme }) => theme.colors.black};
   border-radius: ${({ theme }) => theme.borderRadius};
