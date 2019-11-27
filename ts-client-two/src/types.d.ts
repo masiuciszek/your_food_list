@@ -14,6 +14,7 @@ type IStateDishes = {
   loading: boolean;
   flirtedDishes: null;
   current: null;
+  addDish: any;
 }
 
 type IStateAuth = {
@@ -86,5 +87,5 @@ interface EAuthActions {
 
 type IActionType = {
   type: string;
-  payload?: object;
+  payload?: any;
 }

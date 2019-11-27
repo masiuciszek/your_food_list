@@ -8,9 +8,10 @@ interface Props {
 
 const Dishes: React.FC<Props> = () => {
   const { dishes } = React.useContext(DishContext);
+
   return (
     <div>
-      {dishes.map((dish) => <DishItem key={dish.id} dish={dish} />)}
+      {dishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />)}
     </div>
   );
 };

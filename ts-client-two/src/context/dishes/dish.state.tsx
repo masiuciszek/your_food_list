@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import uuid from 'uuid/v4';
@@ -9,7 +10,7 @@ interface Props {
   children: JSX.Element[] | JSX.Element;
 }
 
-const initialState: IStateDishes = {
+const initialState: IStateDishes | any = {
   dishes: [
     {
       id: uuid(), name: 'Pizza', description: 'love pizza with great bread', country: 'Italy', type: 'main',
@@ -34,8 +35,14 @@ export const DishContext = React.createContext<IStateDishes>(initialState);
 
 
 const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
-  let a;
   const [state, dispatch] = React.useReducer(DishReducer, initialState);
+
+  const addDish = (newDish: Dish) => {
+    dispatch({
+      type: EContextDishesActions.ADD_DISH,
+      payload: newDish,
+    });
+  };
   return (
     <DishContext.Provider value={{
       dishes: state.dishes,
@@ -43,6 +50,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       loading: state.loading,
       flirtedDishes: state.flirtedDishes,
       current: state.current,
+      addDish,
     }}
     >
       {children}

@@ -5,7 +5,11 @@ export default (state: IStateDishes, action: IActionType) => {
       return {
         ...state,
       };
-
+    case EContextDishesActions.ADD_DISH:
+      return {
+        ...state,
+        dishes: [...state.dishes, action.payload],
+      };
     default:
       return state;
   }
