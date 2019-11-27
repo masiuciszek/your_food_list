@@ -1,6 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import BtnPrimary from '../styled/Button';
+import { DishContext } from '../../context/dishes/dish.state';
 
 interface Props {
 
@@ -44,18 +45,37 @@ const StyledSelect = styled.select`
 
 
 const DishForm: React.FC<Props> = () => {
-  let a;
+  const { addDish } = React.useContext(DishContext);
+
+  const [formData, setFormData] = React.useState({
+    name: '',
+    country: '',
+    type: 'main',
+    description: '',
+  });
+  const {
+    name, country, type, description,
+  } = formData;
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { value, name } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(formData);
+  };
   return (
     <>
-      <StyledForm>
+      <StyledForm onSubmit={handleSubmit}>
         <FormGroup>
-          <StyledInput type="text" placeholder="name" name="name" />
+          <StyledInput type="text" placeholder="name" name="name" value={name} onChange={handleChange} />
         </FormGroup>
         <FormGroup>
-          <StyledInput type="text" placeholder="country" name="country" />
+          <StyledInput type="text" placeholder="country" name="country" value={country} onChange={handleChange} />
         </FormGroup>
         <FormGroup>
-          <StyledSelect>
+          <StyledSelect value={type} onChange={handleChange} name="type">
             <option disabled>Choose your dish type</option>
             <option value="breakfast">breakfast</option>
             <option value="snack">snack</option>
@@ -64,7 +84,7 @@ const DishForm: React.FC<Props> = () => {
           </StyledSelect>
         </FormGroup>
         <FormGroup>
-          <StyledInput type="text" placeholder="description" name="description" />
+          <StyledInput type="text" placeholder="description" name="description" onChange={handleChange} value={description} />
         </FormGroup>
         <FormGroup><BtnPrimary>Add new Dish</BtnPrimary></FormGroup>
       </StyledForm>
