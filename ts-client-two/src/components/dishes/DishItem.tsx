@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { Edit2, Delete } from 'styled-icons/feather';
 import { Dish } from '../../types';
 import { DishContext } from '../../context/dishes/dish.state';
+import { fadeDown } from '../../utils/animation';
 
 interface Props {
   dish: Dish;
@@ -70,6 +71,7 @@ const StyledDish = styled.div`
   color: ${({ theme }) => theme.colors.white};
   margin: .5rem 0;
   box-shadow: ${({ theme }) => theme.shadow.lightShadow};
+  animation: ${fadeDown} 500ms ease-in-out;
   .head{
     display: flex;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import contextActions, { ADD_DISH, SET_CURRENT, GET_DISHES } from '../contextTypes';
+import contextActions from '../contextTypes';
 import { IStateDishes, IActionType } from '../../types';
 
 

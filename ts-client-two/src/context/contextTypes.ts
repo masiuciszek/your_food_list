@@ -1,10 +1,5 @@
 import { DefaultActionsTypes } from '../types';
 
-export const GET_DISHES = 'GET_DISHES';
-export const ADD_DISH = 'ADD_DISH';
-export const SET_CURRENT = 'SET_CURRENT';
-export const REMOVE_DISH = 'REMOVE_DISH';
-
 
 const contextActions: DefaultActionsTypes = {
   dishes: {
@@ -13,6 +8,7 @@ const contextActions: DefaultActionsTypes = {
     DELETE_DISH: 'DELETE_DISH',
     SET_CURRENT: 'SET_CURRENT',
     UPDATE_DISH: 'UPDATE_DISH',
+    SEARCH_DISHES: 'SEARCH_DISHES',
   },
 };
 

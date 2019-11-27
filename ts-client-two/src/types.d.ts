@@ -100,5 +100,6 @@ export interface DefaultActionsTypes {
     SET_CURRENT: string;
     ADD_DISH: string;
     UPDATE_DISH: string;
+    SEARCH_DISHES: string;
   };
 }
