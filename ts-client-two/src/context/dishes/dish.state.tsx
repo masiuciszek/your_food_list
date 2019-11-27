@@ -50,6 +50,10 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       payload: id,
     });
   };
+
+  const setCurrent = (dish: Dish) => dispatch({ type: contextActions.dishes.SET_CURRENT, payload: dish });
+
+
   return (
     <DishContext.Provider value={{
       dishes: state.dishes,
@@ -59,6 +63,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       current: state.current,
       addDish,
       deleteDish,
+      setCurrent,
     }}
     >
       {children}

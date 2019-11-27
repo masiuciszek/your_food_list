@@ -13,9 +13,10 @@ export type IStateDishes = {
   error: null;
   loading: boolean;
   flirtedDishes: null;
-  current: null;
+  current: Dish;
   addDish: any;
   deleteDish: any;
+  setCurrent: any;
 }
 
 type IStateAuth = {

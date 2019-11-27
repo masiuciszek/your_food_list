@@ -22,6 +22,11 @@ export default (state: IStateDishes, action: IActionType) => {
         dishes: state.dishes.filter((dish) => dish.id !== payload),
         loading: false,
       };
+    case contextActions.dishes.SET_CURRENT:
+      return {
+        ...state,
+        current: payload,
+      };
     default:
       return state;
   }

@@ -13,6 +13,56 @@ interface LabelProps {
   type: string;
 }
 
+
+const DishItem: React.FC<Props> = ({ dish }) => {
+  const { deleteDish, setCurrent } = React.useContext(DishContext);
+  const {
+    id, name, description, country, type,
+  } = dish;
+
+
+  const handleDelete = () => {
+    deleteDish(id);
+  };
+
+  return (
+    <StyledDish>
+      <div className="head">
+        <h3>
+          Dish Name:
+          {' '}
+          {name}
+        </h3>
+        <Label type={type}><small>{type}</small></Label>
+      </div>
+      <h3>
+        Country:
+        {' '}
+        {country.toLowerCase() === 'italy' && '🇮🇹'
+         || country.toLowerCase() === 'spain' && '🇪🇸'
+         || country.toLowerCase() === 'england' && '🏴󠁧󠁢󠁥󠁮󠁧󠁿'
+         || country.toLowerCase() === 'america' && '🇺🇸'
+         || 'λ' }
+      </h3>
+
+      <p>
+        Desc:
+        {' '}
+        {description}
+      </p>
+      <CtaBtnStyled>
+        <span onClick={() => setCurrent(dish)}>
+          <Edit2 size="35" />
+        </span>
+        <span onClick={handleDelete}>
+          <Delete size="35" />
+        </span>
+      </CtaBtnStyled>
+
+    </StyledDish>
+  );
+};
+
 const StyledDish = styled.div`
   padding: 1rem;
   position: relative;
@@ -59,51 +109,4 @@ const CtaBtnStyled = styled.div`
     }
   }
 `;
-
-const DishItem: React.FC<Props> = ({ dish }) => {
-  const { deleteDish } = React.useContext(DishContext);
-  const {
-    id, name, description, country, type,
-  } = dish;
-  const handleDelete = () => {
-    deleteDish(id);
-  };
-
-  return (
-    <StyledDish>
-      <div className="head">
-        <h3>
-          Dish Name:
-          {' '}
-          {name}
-        </h3>
-        <Label type={type}><small>{type}</small></Label>
-      </div>
-      <h3>
-        Country:
-        {' '}
-        {country.toLowerCase() === 'italy' && '🇮🇹'
-         || country.toLowerCase() === 'spain' && '🇪🇸'
-         || country.toLowerCase() === 'england' && '🏴󠁧󠁢󠁥󠁮󠁧󠁿'
-         || country.toLowerCase() === 'america' && '🇺🇸'
-         || 'λ' }
-      </h3>
-
-      <p>
-        Desc:
-        {' '}
-        {description}
-      </p>
-      <CtaBtnStyled>
-        <span>
-          <Edit2 size="35" />
-        </span>
-        <span onClick={handleDelete}>
-          <Delete size="35" />
-        </span>
-      </CtaBtnStyled>
-
-    </StyledDish>
-  );
-};
 export default DishItem;

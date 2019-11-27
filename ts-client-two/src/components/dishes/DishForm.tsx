@@ -45,7 +45,7 @@ const StyledSelect = styled.select`
 
 
 const DishForm: React.FC<Props> = () => {
-  const { addDish } = React.useContext(DishContext);
+  const { addDish, current } = React.useContext(DishContext);
 
   const [formData, setFormData] = React.useState({
     name: '',
@@ -56,6 +56,21 @@ const DishForm: React.FC<Props> = () => {
   const {
     name, country, type, description,
   } = formData;
+
+
+  React.useEffect(() => {
+    if (current !== null) {
+      setFormData(current);
+    } else {
+      setFormData({
+        name: '',
+        type: 'main',
+        country: '',
+        description: '',
+      });
+    }
+  });
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
