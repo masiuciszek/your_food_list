@@ -20,14 +20,16 @@ const Navbar: React.FC<Props> = () => {
   return (
     <StyledNavbar show={show}>
       <div className="title">
-        <h3>
-          Food
-          {' '}
-          <span>for</span>
-          {' '}
-            You
-          {' '}
-        </h3>
+      <Link to="/">
+      <h3>
+      Food
+      {' '}
+      <span>for</span>
+      {' '}
+      You
+      {' '}
+      </h3>
+      </Link>
       </div>
       {show && (
         <>
