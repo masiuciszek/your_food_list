@@ -55,7 +55,7 @@ router.post(
       if (!isMatch) {
         return res.status(400).json({ msg: 'Invalid Credentials' });
       }
-
+      await user.generateAuthToken();
       const payload = {
         user: {
           id: user.id,
@@ -139,7 +139,10 @@ router.delete('/', authMiddleware, async (req, res) => {
 router.post('/logout', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    console.log(user);
+    console.log(Object.assign(user.tokens));
+    user.tokens = [];
+    await user.save();
+    res.send('logged out');
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
