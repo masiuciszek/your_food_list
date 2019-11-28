@@ -23,11 +23,12 @@ export type IStateDishes = {
 }
 
 type IStateAuth = {
-  user: User;
-  loading: true;
-  isAuth: boolean;
-  token: string;
+  user: User | null;
+  loading: boolean;
   error: null;
+  isAuth: boolean;
+  user: null;
+  token: string | null;
 }
 
 export type Dish = {

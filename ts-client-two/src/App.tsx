@@ -8,23 +8,26 @@ import Info from './pages/info';
 import About from './pages/about';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import AuthProvider from './context/auth/auth.state';
 
 const App: React.FC = () => {
 
   return (
+    <AuthProvider>
     <DishProvider>
-      <Layout>
-        <AppWrapper>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/info" component={Info} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-          </Switch>
-        </AppWrapper>
-      </Layout>
+    <Layout>
+    <AppWrapper>
+    <Switch>
+    <Route exact path="/" component={HomePage} />
+    <Route exact path="/info" component={Info} />
+    <Route exact path="/about" component={About} />
+    <Route exact path="/login" component={Login} />
+    <Route exact path="/register" component={Register} />
+    </Switch>
+    </AppWrapper>
+    </Layout>
     </DishProvider>
+    </AuthProvider>
   );
 };
 
