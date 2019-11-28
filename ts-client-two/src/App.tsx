@@ -9,6 +9,11 @@ import About from './pages/about';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import AuthProvider from './context/auth/auth.state';
+import setAuthToken from './utils/setAuthToken';
+
+if(localStorage.token){
+  setAuthToken(localStorage.token)
+}
 
 const App: React.FC = () => {
 

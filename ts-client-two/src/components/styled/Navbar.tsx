@@ -5,6 +5,7 @@ import { Menu } from 'styled-icons/feather';
 import { links } from '../../utils/mix';
 import { fadeDown } from '../../utils/animation';
 import useToggle from '../../hooks/useToggle';
+import { authContext } from '../../context/auth/auth.state';
 
 interface Props {
 
@@ -15,7 +16,12 @@ interface NavBarProps {
 
 
 const Navbar: React.FC<Props> = () => {
+  const{isAuth,user,loading,logout} = React.useContext(authContext)
   const [show, toggleShow] = useToggle(false);
+
+  const handleLogout = () => {
+    logout()
+  }
 
   return (
     <StyledNavbar show={show}>
@@ -30,6 +36,7 @@ const Navbar: React.FC<Props> = () => {
       {' '}
       </h3>
       </Link>
+      {!loading && user &&  <h5>Welcome Master {user.firstName}</h5> }
       </div>
       {show && (
         <>
@@ -49,6 +56,7 @@ const Navbar: React.FC<Props> = () => {
             <Link to={link.path}>{link.text}</Link>
           </li>
         ))}
+        {!loading && !isAuth ? <> <li> <Link to="/register">Register</Link> </li>  <li> <Link to="/login">Login</Link> </li>  </> : <> <li> <Link to="/profile">Profile</Link> </li>  <li> <span onClick={handleLogout}>Logout</span> </li>   </>  }
       </NavList>
 
     </StyledNavbar>
@@ -109,11 +117,12 @@ export const NavList = styled.ul`
     &:hover{
       transform: scale(1.06);
     }
-    a{
+    a,span{
       font-size: 1.2rem;
       text-transform:uppercase;
       color: ${({ theme }) => theme.colors.white};
       transition: ${({ theme }) => theme.transition.mainTransition};
+      cursor: pointer;
       &:hover {
         color: ${(props) => props.theme.colors.primaryColor};
         border-bottom: 1px solid ${(props) => props.theme.colors.white};

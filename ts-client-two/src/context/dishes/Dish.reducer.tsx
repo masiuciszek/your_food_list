@@ -46,6 +46,7 @@ export default (state: IStateDishes, action: IActionType) => {
           ...state,
           flirtedDishes: null
         }
+
     default:
       return state;
   }

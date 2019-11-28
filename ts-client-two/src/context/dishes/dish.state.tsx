@@ -73,6 +73,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
     })
   }
 
+
   return (
     <DishContext.Provider value={{
       dishes: state.dishes,
@@ -85,7 +86,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       setCurrent,
       updateDish,
       searchDish,
-      clearFilter
+      clearFilter,
     }}
     >
       {children}

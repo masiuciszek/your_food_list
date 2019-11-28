@@ -75,7 +75,7 @@ const DishForm: React.FC<Props> = () => {
   );
 };
 
-const StyledForm = styled.form`
+export const StyledForm = styled.form`
   padding: 1rem;
   align-self:center;
   /* box-shadow: ${({ theme }) => theme.shadow.lightShadow}; */
@@ -84,7 +84,7 @@ const StyledForm = styled.form`
   }
 `;
 
-const FormGroup = styled.div`
+export const FormGroup = styled.div`
   padding: .5rem;
 
 `;

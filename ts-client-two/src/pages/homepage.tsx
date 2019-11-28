@@ -4,6 +4,7 @@ import Dishes from '../components/dishes/Dishes';
 import DishForm from '../components/dishes/DishForm';
 import { fadeDown } from '../utils/animation';
 import Search from '../components/dishes/Search';
+import { authContext } from '../context/auth/auth.state';
 
 interface Props {
 
@@ -28,7 +29,13 @@ const StyledGrid = styled.div`
   }
 `;
 
-const HomePage: React.FC<Props> = () => (
+const HomePage: React.FC<Props> = () => {
+  const{ loadUser } = React.useContext(authContext)
+
+  React.useEffect(() => {
+    loadUser()
+  },[])
+return (
   <>
     <h1 style={{
       textAlign: 'left', margin: '1rem 0', borderBottom: '2px solid #333', width: '15rem',
@@ -43,4 +50,5 @@ const HomePage: React.FC<Props> = () => (
     </StyledGrid>
   </>
 );
+  }
 export default HomePage;

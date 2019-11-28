@@ -1,3 +1,5 @@
+import { string } from 'prop-types';
+
 type Navlinks = {
   link: Link;
 }
@@ -20,6 +22,7 @@ export type IStateDishes = {
   updateDish: any;
   searchDish: any;
   clearFilter: () => void;
+
 }
 
 type IStateAuth = {
@@ -29,6 +32,10 @@ type IStateAuth = {
   isAuth: boolean;
   user: null;
   token: string | null;
+  loadUser: any;
+  register: any;
+  logout: () => void;
+
 }
 
 export type Dish = {
@@ -105,5 +112,24 @@ export interface DefaultActionsTypes {
     UPDATE_DISH: string;
     SEARCH_DISHES: string;
     CLEAR_FILTER: string;
+
+  };
+  auth: {
+    SET_LOADING: string;
+    REGISTER_USER: string;
+    GET_USERS: string;
+    REMOVE_USER: string;
+    USER_ERROR: string;
+    SET_CURRENT: string;
+    CLEAR_CURRENT: string;
+    AUTH_ERROR: string;
+    LOGIN_FAIL: string;
+    LOAD_USER: string;
+    LOGIN: string;
+    REGISTER_FAIL: string;
+    REMOVE_ALERT: string;
+    SET_ALERT: string;
+    REGISTER_SUCCESS: string;
+    LOG_OUT: string;
   };
 }

@@ -19,6 +19,8 @@ const Dishes: React.FC<Props> = () => {
     return <h4 style={{ margin: '3rem 0', fontSize: '2.4rem' }}>Please Add A Dish</h4>;
   }
 
+
+
   return (
     <StyledDishes>
       {flirtedDishes !== null && flirtedDishes.length > 0 ? flirtedDishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />) : dishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />) }
