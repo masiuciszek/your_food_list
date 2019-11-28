@@ -37,7 +37,7 @@ const DishItem: React.FC<Props> = ({ dish }) => {
         <Label type={type}><small>{type}</small></Label>
       </div>
       <h3>
-        Country:
+        Country: {country}
         {' '}
         {country.toLowerCase() === 'italy' && '🇮🇹'
          || country.toLowerCase() === 'spain' && '🇪🇸'

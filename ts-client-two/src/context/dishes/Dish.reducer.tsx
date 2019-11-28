@@ -33,6 +33,19 @@ export default (state: IStateDishes, action: IActionType) => {
         dishes: state.dishes.map((dish) => (dish.id === payload.id ? payload : dish)),
         loading: false,
       };
+      case contextActions.dishes.SEARCH_DISHES:
+        return{
+          ...state,
+          flirtedDishes: state.dishes.filter(dish => {
+            const text = new RegExp(`${payload}`, 'gi');
+            return dish.name.match(text) || dish.country.match(text)
+          })
+        }
+      case contextActions.dishes.CLEAR_FILTER:
+        return{
+          ...state,
+          flirtedDishes: null
+        }
     default:
       return state;
   }

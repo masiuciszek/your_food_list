@@ -69,7 +69,7 @@ const DishForm: React.FC<Props> = () => {
         <FormGroup>
           <StyledInput type="text" placeholder="description" name="description" onChange={handleChange} value={description} />
         </FormGroup>
-        <FormGroup><BtnPrimary>Add new Dish</BtnPrimary></FormGroup>
+        <FormGroup><BtnPrimary>{current ? 'Update' : 'Add new Dish'} </BtnPrimary></FormGroup>
       </StyledForm>
     </>
   );

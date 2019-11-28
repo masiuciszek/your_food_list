@@ -60,6 +60,19 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
     });
   };
 
+  const searchDish = (text:string) => {
+    dispatch({
+      type: contextActions.dishes.SEARCH_DISHES,
+      payload: text
+    })
+  }
+
+  const clearFilter = () => {
+    dispatch({
+      type: contextActions.dishes.CLEAR_FILTER
+    })
+  }
+
   return (
     <DishContext.Provider value={{
       dishes: state.dishes,
@@ -71,6 +84,8 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       deleteDish,
       setCurrent,
       updateDish,
+      searchDish,
+      clearFilter
     }}
     >
       {children}

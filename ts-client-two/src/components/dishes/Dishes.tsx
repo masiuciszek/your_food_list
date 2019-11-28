@@ -14,14 +14,16 @@ const StyledDishes = styled.div`
 
 `;
 const Dishes: React.FC<Props> = () => {
-  const { dishes } = React.useContext(DishContext);
+  const { dishes,flirtedDishes } = React.useContext(DishContext);
   if (dishes && dishes.length === 0) {
     return <h4 style={{ margin: '3rem 0', fontSize: '2.4rem' }}>Please Add A Dish</h4>;
   }
+
   return (
     <StyledDishes>
-      {dishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />)}
+      {flirtedDishes !== null && flirtedDishes.length > 0 ? flirtedDishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />) : dishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />) }
     </StyledDishes>
   );
 };
 export default Dishes;
+// {dishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />)   }

@@ -12,12 +12,14 @@ export type IStateDishes = {
   dishes: Dish[];
   error: null;
   loading: boolean;
-  flirtedDishes: null;
+  flirtedDishes: Dish[] | null;
   current: Dish;
   addDish: any;
   deleteDish: any;
   setCurrent: any;
   updateDish: any;
+  searchDish: any;
+  clearFilter: () => void;
 }
 
 type IStateAuth = {
@@ -101,5 +103,6 @@ export interface DefaultActionsTypes {
     ADD_DISH: string;
     UPDATE_DISH: string;
     SEARCH_DISHES: string;
+    CLEAR_FILTER: string;
   };
 }

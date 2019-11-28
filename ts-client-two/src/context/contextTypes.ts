@@ -9,6 +9,7 @@ const contextActions: DefaultActionsTypes = {
     SET_CURRENT: 'SET_CURRENT',
     UPDATE_DISH: 'UPDATE_DISH',
     SEARCH_DISHES: 'SEARCH_DISHES',
+    CLEAR_FILTER: 'CLEAR_FILTER',
   },
 };
 

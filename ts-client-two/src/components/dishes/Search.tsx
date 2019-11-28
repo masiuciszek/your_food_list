@@ -59,8 +59,28 @@ const StyledBox = styled.div<SearchProps>`
   }
 `;
 const Search: React.FC<Props> = () => {
-  const {} = React.useContext(DishContext);
+  const {searchDish,clearFilter,flirtedDishes} = React.useContext(DishContext);
   const [showSearch, toggleSearch] = useToggle(false);
+  const [textValue, setTextValue] = React.useState('')
+
+  React.useEffect(() => {
+    if(flirtedDishes === [] || flirtedDishes === null ){
+      setTextValue('')
+    }
+  },[])
+
+  const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+    setTextValue(e.target.value)
+    if(e.target.value !== ''){
+      searchDish(textValue)
+    } else {
+      clearFilter()
+    }
+    // TODO: Delete
+      console.log(textValue , 'text value')
+      console.log(flirtedDishes, ' filtred dishes')
+  }
+
   return (
     <SearchWrapper>
       <StyledBox onClick={toggleSearch} search={showSearch}>
@@ -69,7 +89,7 @@ const Search: React.FC<Props> = () => {
       {
         showSearch && (
           <>
-            <StyledSearch type="text" search={showSearch} />
+            <StyledSearch type="text" search={showSearch} onChange={handleChange} value={textValue}  />
             <span className="close" onClick={toggleSearch}>Close</span>
           </>
         )
