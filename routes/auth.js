@@ -109,7 +109,7 @@ router.put('/:id', authMiddleware, async (req, res) => {
 });
 
 /**
- * @route Delete auth
+ * @route Delete /auth
  * @desc delete user
  * @access Private
  */
@@ -124,6 +124,22 @@ router.delete('/', authMiddleware, async (req, res) => {
     await User.findOneAndRemove({ _id: req.user.id });
 
     res.json({ msg: 'User deleted' });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+/**
+ * @route Post /auth/logout
+ * @desc logout user
+ * @access Private
+ */
+
+router.post('/logout', authMiddleware, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select('-password');
+    console.log(user);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
