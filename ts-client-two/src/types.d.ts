@@ -35,6 +35,7 @@ type IStateAuth = {
   loadUser: any;
   register: any;
   logout: () => void;
+  login: any;
 
 }
 

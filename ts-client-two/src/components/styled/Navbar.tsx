@@ -16,27 +16,35 @@ interface NavBarProps {
 
 
 const Navbar: React.FC<Props> = () => {
-  const{isAuth,user,loading,logout} = React.useContext(authContext)
+  const {
+    isAuth, user, loading, logout,
+  } = React.useContext(authContext);
   const [show, toggleShow] = useToggle(false);
 
   const handleLogout = () => {
-    logout()
-  }
+    logout();
+  };
 
   return (
     <StyledNavbar show={show}>
       <div className="title">
-      <Link to="/">
-      <h3>
-      Food
-      {' '}
-      <span>for</span>
-      {' '}
-      You
-      {' '}
-      </h3>
-      </Link>
-      {!loading && user &&  <h5>Welcome Master {user.firstName}</h5> }
+        <Link to="/">
+          <h3>
+              Food
+            {' '}
+            <span>for</span>
+            {' '}
+            You
+            {' '}
+          </h3>
+        </Link>
+        {!loading && user && (
+          <h5>
+      Welcome Master
+            {' '}
+            {user.firstName}
+          </h5>
+        ) }
       </div>
       {show && (
         <>
@@ -56,7 +64,28 @@ const Navbar: React.FC<Props> = () => {
             <Link to={link.path}>{link.text}</Link>
           </li>
         ))}
-        {!loading && !isAuth ? <> <li> <Link to="/register">Register</Link> </li>  <li> <Link to="/login">Login</Link> </li>  </> : <> <li> <Link to="/profile">Profile</Link> </li>  <li> <span onClick={handleLogout}>Logout</span> </li>   </>  }
+        {!isAuth && (
+          <>
+            <li>
+              <Link to="/register">Register</Link>
+            </li>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+          </>
+        )}
+        {
+          isAuth && !loading && (
+            <>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+              <li>
+                <span onClick={handleLogout}>Logout</span>
+              </li>
+            </>
+          )
+        }
       </NavList>
 
     </StyledNavbar>
