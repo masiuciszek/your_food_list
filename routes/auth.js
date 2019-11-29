@@ -149,4 +149,17 @@ router.post('/logout', authMiddleware, async (req, res) => {
   }
 });
 
+router.post('/logout/all', authMiddleware, async (req, res) => {
+  try {
+    req.user.tokens = req.user.tokens.filter(
+      token => token.token !== req.token
+    );
+    await req.user.save();
+    res.send('logged out');
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
