@@ -36,7 +36,7 @@ type IStateAuth = {
   register: any;
   logout: () => void;
   login: any;
-
+  deleteProfile: () => void;
 }
 
 export type Dish = {

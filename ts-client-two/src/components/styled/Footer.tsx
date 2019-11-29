@@ -63,7 +63,7 @@ const Footer: React.FC<Props> = () => (
     <FooterListIcons>
       {socialIcons.map((icon) => (
         <li key={icon.id}>
-          <a href={icon.url}>{icon.icon}</a>
+          <a href={icon.url} target="_blank" rel="noopener noreferrer">{icon.icon}</a>
         </li>
       ))}
     </FooterListIcons>

@@ -18,10 +18,9 @@ export const links: {id: string; path: string; text: string}[] = [
 
 
 const socialIcons: {id: string; url: string; icon: any }[] = [
-  { id: uuid(), url: '/', icon: <Github size="35" /> },
-  { id: uuid(), url: '/', icon: <Instagram size="35" /> },
-  { id: uuid(), url: '/', icon: <Facebook size="35" /> },
+  { id: uuid(), url: 'https://github.com/masiuciszek', icon: <Github size="35" /> },
+  { id: uuid(), url: 'https://www.instagram.com/masiuciszek/', icon: <Instagram size="35" /> },
+  { id: uuid(), url: 'https://www.marcellable.com/Welcome/', icon: <Facebook size="35" /> },
 ];
 
 export default socialIcons;
-

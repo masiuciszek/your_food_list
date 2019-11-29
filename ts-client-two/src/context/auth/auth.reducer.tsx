@@ -30,7 +30,16 @@ export default (state: IStateAuth, action: IActionType) => {
         loading: false,
         user: null,
       };
-
+    case contextActions.auth.REMOVE_USER:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        token: null,
+        isAuth: false,
+        loading: false,
+        user: null,
+        error: payload,
+      };
     default:
       return state;
   }

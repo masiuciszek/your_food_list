@@ -92,7 +92,16 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
   };
 
   // const clearErrors =() => {}
-  // const deleteProfile =() => {}
+  const deleteProfile = async () => {
+    if (window.confirm('Are you sure? This can NOT be undone!')) {
+      try {
+        await axios.delete('/auth');
+        dispatch({ type: contextActions.auth.REMOVE_USER });
+      } catch (err) {
+        dispatch({ type: contextActions.auth.AUTH_ERROR, payload: err.message });
+      }
+    }
+  };
 
   // TODO: Try the logout endpoint
 
@@ -107,6 +116,7 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
       register,
       logout,
       login,
+      deleteProfile,
     }}
     >
       {children}
