@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 import contextActions from '../contextTypes';
 import { IStateDishes, IActionType } from '../../types';
@@ -32,7 +33,7 @@ export default (state: IStateDishes, action: IActionType) => {
     case contextActions.dishes.UPDATE_DISH:
       return {
         ...state,
-        dishes: state.dishes.map((dish) => (dish._id === payload.id ? payload : dish)),
+        dishes: state.dishes.map((dish) => (dish._id === payload._id ? payload : dish)),
         loading: false,
       };
     case contextActions.dishes.SEARCH_DISHES:

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import * as React from 'react';
@@ -78,12 +79,26 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
 
   const setCurrent = (dish: Dish) => dispatch({ type: contextActions.dishes.SET_CURRENT, payload: dish });
 
-  const updateDish = (formData: Dish) => {
-    dispatch({
-      type: contextActions.dishes.UPDATE_DISH,
-      payload: formData,
-    });
+  const updateDish = async (dish: Dish) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.put(`/dishes/${dish._id}`, dish, config);
+      dispatch({
+        type: contextActions.dishes.UPDATE_DISH,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: contextActions.dishes.DISH_ERROR,
+        payload: err.message,
+      });
+    }
   };
+
 
   const searchDish = (text: string) => {
     dispatch({
