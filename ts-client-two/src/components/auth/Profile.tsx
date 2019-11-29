@@ -60,7 +60,7 @@ const Profile: React.FC<ProfileProp> = ({ history }) => {
       </h1>
       <div className="body">
         <h3>
-        First Name:
+          First Name:
           {' '}
           {!loading && user && user.firstName}
         </h3>
@@ -76,8 +76,7 @@ const Profile: React.FC<ProfileProp> = ({ history }) => {
         </h3>
       </div>
       <div className="btn-group">
-        <BtnPrimary>Edit</BtnPrimary>
-        <BtnPrimary onClick={() => deleteProfile()}>Delete</BtnPrimary>
+        <BtnPrimary onClick={() => deleteProfile()}>Delete Profile</BtnPrimary>
       </div>
     </StyledProfile>
   );

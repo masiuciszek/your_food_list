@@ -47,21 +47,24 @@ const Register: React.FC<RegisterProp> = ({ history }) => {
 
   const goHome = () => history.push('/');
 
-  console.log(isAuth);
+
   React.useEffect(() => {
     loadUser();
     if (isAuth) {
       goHome();
     }
-  }, [isAuth]);
+  }, [isAuth, history]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (password !== password2) {
+    if (password !== password2 || firstName === ''
+    || lastName === '' || email === '' || !firstName.match(/[a-z]+/gi)
+     || !lastName.match(/[a-z]+/gi)
+      || !password.match(/[a-z]+[0-9a-zA-Z]{6,}/)) {
       alert('please enter the fields');
     } else {
       register(formData);

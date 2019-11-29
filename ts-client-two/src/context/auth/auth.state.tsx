@@ -104,6 +104,16 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
   };
 
   // TODO: Try the logout endpoint
+  const serverLogout = async () => {
+    try {
+      await axios.post('/auth/logout');
+      dispatch({
+        type: contextActions.auth.SERVER_LOGOUT,
+      });
+    } catch (err) {
+      dispatch({ type: contextActions.auth.SERVER_ERROR, payload: err.message });
+    }
+  };
 
   return (
     <authContext.Provider value={{
@@ -117,6 +127,7 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
       logout,
       login,
       deleteProfile,
+      serverLogout,
     }}
     >
       {children}

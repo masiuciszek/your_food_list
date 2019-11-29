@@ -29,6 +29,8 @@ const contextActions: DefaultActionsTypes = {
     SET_ALERT: 'SET_ALERT',
     REGISTER_SUCCESS: 'REGISTER_SUCCESS',
     LOG_OUT: 'LOG_OUT',
+    SERVER_LOGOUT: 'SERVER_LOGOUT',
+    SERVER_ERROR: 'SERVER_ERROR',
   },
 };
 

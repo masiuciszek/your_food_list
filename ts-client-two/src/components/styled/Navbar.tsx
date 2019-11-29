@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { Menu } from 'styled-icons/feather';
+import { Link } from 'react-router-dom';
 import { links } from '../../utils/mix';
 import { fadeDown } from '../../utils/animation';
 import useToggle from '../../hooks/useToggle';
@@ -17,13 +17,14 @@ interface NavBarProps {
 
 const Navbar: React.FC<Props> = () => {
   const {
-    isAuth, user, loading, logout,
+    isAuth, user, loading, serverLogout,
   } = React.useContext(authContext);
   const [show, toggleShow] = useToggle(false);
 
   const handleLogout = () => {
-    logout();
+    serverLogout();
   };
+
 
   return (
     <StyledNavbar show={show}>
@@ -54,6 +55,28 @@ const Navbar: React.FC<Props> = () => {
                 <Link to={link.path}>{link.text}</Link>
               </li>
             ))}
+            {!isAuth && (
+              <>
+                <li>
+                  <Link to="/register">Register</Link>
+                </li>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+              </>
+            )}
+            {
+              isAuth && !loading && (
+                <>
+                  <li>
+                    <Link to="/profile">Profile</Link>
+                  </li>
+                  <li>
+                    <span onClick={handleLogout}>Logout</span>
+                  </li>
+                </>
+              )
+            }
           </SmallNavList>
         </>
       )}
@@ -94,7 +117,7 @@ const Navbar: React.FC<Props> = () => {
 
 const StyledNavbar = styled.nav<NavBarProps>`
   /* padding: 1.6rem  1rem; */
-  padding: ${({ show }) => (show ? '1rem 1rem 7rem 1rem' : '1.6rem 1rem')};
+  padding: ${({ show }) => (show ? '1rem 1rem 10rem 1rem' : '1.6rem 1rem')};
   animation: ${fadeDown} 500ms ease-in-out;
   color: ${(props) => props.theme.colors.white};
   background: ${(props) => props.theme.colors.black};
@@ -169,7 +192,8 @@ const SmallNavList = styled(NavList)`
   animation: ${fadeDown} 500ms ease-in-out;
   display: flex;
   position: absolute;
-  top: 5.6rem;
+  top: 7.6rem;
+
   li{
     margin: .3rem 0;
     a{

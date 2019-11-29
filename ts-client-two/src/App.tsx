@@ -11,6 +11,7 @@ import Register from './components/auth/Register';
 import AuthProvider from './context/auth/auth.state';
 import setAuthToken from './utils/setAuthToken';
 import Profile from './components/auth/Profile';
+import PrivateRouting from './components/hoc/PrivateRouting';
 
 if (localStorage.token) {
   setAuthToken(localStorage.token);
@@ -22,12 +23,12 @@ const App: React.FC = () => (
       <Layout>
         <AppWrapper>
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <PrivateRouting exact path="/" component={HomePage} />
             <Route exact path="/info" component={Info} />
             <Route exact path="/about" component={About} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
+            <PrivateRouting exact path="/profile" component={Profile} />
           </Switch>
         </AppWrapper>
       </Layout>

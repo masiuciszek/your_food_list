@@ -37,6 +37,7 @@ type IStateAuth = {
   logout: () => void;
   login: any;
   deleteProfile: () => void;
+  serverLogout: () => void;
 }
 
 export type Dish = {
@@ -86,7 +87,8 @@ enum EContextAuthActions {
   REMOVE_ALERT = 'REMOVE_ALERT',
   SET_ALERT = 'SET_ALERT',
   REGISTER_SUCCESS = 'REGISTER_SUCCESS',
-  LOG_OUT = 'LOG_OUT'
+  LOG_OUT = 'LOG_OUT',
+
 }
 
 export interface EDishActions {
@@ -132,5 +134,7 @@ export interface DefaultActionsTypes {
     SET_ALERT: string;
     REGISTER_SUCCESS: string;
     LOG_OUT: string;
+    SERVER_LOGOUT: string;
+    SERVER_ERROR: string;
   };
 }

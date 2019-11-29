@@ -62,7 +62,7 @@ const DishForm: React.FC<Props> = () => {
             <option disabled>Choose your dish type</option>
             <option value="breakfast">breakfast</option>
             <option value="snack">snack</option>
-            <option value="snack">snack</option>
+            <option value="main">main</option>
             <option value="dessert">dessert</option>
           </StyledSelect>
         </FormGroup>
@@ -70,9 +70,9 @@ const DishForm: React.FC<Props> = () => {
           <StyledInput type="text" placeholder="description" name="description" onChange={handleChange} value={description} />
         </FormGroup>
         <FormGroup>
-<BtnPrimary>
-{current ? 'Update' : 'Add new Dish'}
- </BtnPrimary>
+          <BtnPrimary>
+            {current ? 'Update' : 'Add new Dish'}
+          </BtnPrimary>
 
         </FormGroup>
       </StyledForm>

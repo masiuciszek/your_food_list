@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import styled from 'styled-components';
-import { RouteComponentProps, withRouter, Redirect } from 'react-router-dom';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { authContext } from '../../context/auth/auth.state';
 import { StyledForm, FormGroup, StyledInput } from '../dishes/DishForm';
 import BtnPrimary from '../styled/Button';

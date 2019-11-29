@@ -22,6 +22,7 @@ export default (state: IStateAuth, action: IActionType) => {
         loading: false,
       };
     case contextActions.auth.LOG_OUT:
+    case contextActions.auth.SERVER_LOGOUT:
       localStorage.removeItem('token');
       return {
         ...state,
@@ -38,6 +39,12 @@ export default (state: IStateAuth, action: IActionType) => {
         isAuth: false,
         loading: false,
         user: null,
+        error: payload,
+      };
+    case contextActions.auth.SERVER_ERROR:
+      return {
+        ...state,
+        loading: false,
         error: payload,
       };
     default:
