@@ -21,7 +21,7 @@ export default (state: IStateDishes, action: IActionType) => {
     case contextActions.dishes.DELETE_DISH:
       return {
         ...state,
-        dishes: state.dishes.filter((dish) => dish.id !== payload),
+        dishes: state.dishes.filter((dish) => dish._id !== payload),
         loading: false,
       };
     case contextActions.dishes.SET_CURRENT:
@@ -32,7 +32,7 @@ export default (state: IStateDishes, action: IActionType) => {
     case contextActions.dishes.UPDATE_DISH:
       return {
         ...state,
-        dishes: state.dishes.map((dish) => (dish.id === payload.id ? payload : dish)),
+        dishes: state.dishes.map((dish) => (dish._id === payload.id ? payload : dish)),
         loading: false,
       };
     case contextActions.dishes.SEARCH_DISHES:

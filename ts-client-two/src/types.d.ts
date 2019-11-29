@@ -40,7 +40,7 @@ type IStateAuth = {
 }
 
 export type Dish = {
-  id: string;
+  _id: string;
   name: string;
   country: string;
   description: string;

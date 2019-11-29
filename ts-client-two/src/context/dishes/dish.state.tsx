@@ -61,11 +61,19 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
     }
   };
 
-  const deleteDish = (id: string) => {
-    dispatch({
-      type: contextActions.dishes.DELETE_DISH,
-      payload: id,
-    });
+  const deleteDish = async (id: string) => {
+    try {
+      await axios.delete(`/dishes/${id}`);
+      dispatch({
+        type: contextActions.dishes.DELETE_DISH,
+        payload: id,
+      });
+    } catch (err) {
+      dispatch({
+        type: contextActions.dishes.DISH_ERROR,
+        payload: err.message,
+      });
+    }
   };
 
   const setCurrent = (dish: Dish) => dispatch({ type: contextActions.dishes.SET_CURRENT, payload: dish });

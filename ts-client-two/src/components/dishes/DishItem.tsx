@@ -18,12 +18,12 @@ interface LabelProps {
 const DishItem: React.FC<Props> = ({ dish }) => {
   const { deleteDish, setCurrent } = React.useContext(DishContext);
   const {
-    id, name, description, country, type,
+    _id, name, description, country, type,
   } = dish;
 
 
   const handleDelete = () => {
-    deleteDish(id);
+    deleteDish(_id);
   };
 
   return (
@@ -37,7 +37,9 @@ const DishItem: React.FC<Props> = ({ dish }) => {
         <Label type={type}><small>{type}</small></Label>
       </div>
       <h3>
-        Country: {country}
+        Country: 
+{' '}
+{country}
         {' '}
         {country.toLowerCase() === 'italy' && '🇮🇹'
          || country.toLowerCase() === 'spain' && '🇪🇸'

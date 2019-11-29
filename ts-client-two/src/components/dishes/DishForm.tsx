@@ -35,12 +35,12 @@ const DishForm: React.FC<Props> = () => {
     }
   }, [current, DishContext]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>): void => {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (current) {
       updateDish(formData);
@@ -69,7 +69,12 @@ const DishForm: React.FC<Props> = () => {
         <FormGroup>
           <StyledInput type="text" placeholder="description" name="description" onChange={handleChange} value={description} />
         </FormGroup>
-        <FormGroup><BtnPrimary>{current ? 'Update' : 'Add new Dish'} </BtnPrimary></FormGroup>
+        <FormGroup>
+<BtnPrimary>
+{current ? 'Update' : 'Add new Dish'}
+ </BtnPrimary>
+
+        </FormGroup>
       </StyledForm>
     </>
   );

@@ -27,7 +27,8 @@ const Dishes: React.FC<Props> = () => {
 
   return (
     <StyledDishes>
-      {flirtedDishes !== null && flirtedDishes.length > 0 ? flirtedDishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />) : dishes.map((dish: Dish) => <DishItem key={dish.id} dish={dish} />) }
+      {flirtedDishes !== null && flirtedDishes.length > 0 ? flirtedDishes.map((dish: Dish) => <DishItem key={dish._id} dish={dish} />)
+        : dishes.map((dish: Dish) => <DishItem key={dish._id} dish={dish} />) }
     </StyledDishes>
   );
 };
