@@ -2,6 +2,8 @@
 /* eslint-disable react/prop-types */
 import * as React from 'react';
 import uuid from 'uuid/v4';
+
+import axios from 'axios';
 import contextActions from '../contextTypes';
 import DishReducer from './Dish.reducer';
 import { IStateDishes, Dish } from '../../types';
@@ -11,20 +13,7 @@ interface Props {
 }
 
 const initialState: IStateDishes | any = {
-  dishes: [
-    {
-      id: uuid(), name: 'Pizza', description: 'love pizza with great bread', country: 'Italy', type: 'main',
-    },
-    {
-      id: uuid(), name: 'Tomato Soup', description: 'soup with a touch', country: 'Spain', type: 'snack',
-    },
-    {
-      id: uuid(), name: 'Apple Pie', description: 'Warm apple pie with Vanilla souse is awesome!', country: 'America', type: 'dessert',
-    },
-    {
-      id: uuid(), name: 'English breakfast', description: 'English Breakfast', country: 'England', type: 'breakfast',
-    },
-  ],
+  dishes: [],
   error: null,
   loading: true,
   flirtedDishes: null,
@@ -37,11 +26,39 @@ export const DishContext = React.createContext<IStateDishes>(initialState);
 const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
   const [state, dispatch] = React.useReducer(DishReducer, initialState);
 
-  const addDish = (newDish: Dish) => {
-    dispatch({
-      type: contextActions.dishes.ADD_DISH,
-      payload: newDish,
-    });
+  const getDishes = async () => {
+    try {
+      const res = await axios.get('/dishes');
+      dispatch({
+        type: contextActions.dishes.GET_DISHES,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: contextActions.dishes.DISH_ERROR,
+        payload: err.message,
+      });
+    }
+  };
+
+  const addDish = async (newDish: Dish) => {
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    };
+    try {
+      const res = await axios.post('/dishes', newDish, config);
+      dispatch({
+        type: contextActions.dishes.ADD_DISH,
+        payload: res.data,
+      });
+    } catch (err) {
+      dispatch({
+        type: contextActions.dishes.DISH_ERROR,
+        payload: err.message,
+      });
+    }
   };
 
   const deleteDish = (id: string) => {
@@ -60,18 +77,18 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
     });
   };
 
-  const searchDish = (text:string) => {
+  const searchDish = (text: string) => {
     dispatch({
       type: contextActions.dishes.SEARCH_DISHES,
-      payload: text
-    })
-  }
+      payload: text,
+    });
+  };
 
   const clearFilter = () => {
     dispatch({
-      type: contextActions.dishes.CLEAR_FILTER
-    })
-  }
+      type: contextActions.dishes.CLEAR_FILTER,
+    });
+  };
 
 
   return (
@@ -87,6 +104,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       updateDish,
       searchDish,
       clearFilter,
+      getDishes,
     }}
     >
       {children}

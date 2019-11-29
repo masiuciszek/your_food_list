@@ -10,6 +10,7 @@ const contextActions: DefaultActionsTypes = {
     UPDATE_DISH: 'UPDATE_DISH',
     SEARCH_DISHES: 'SEARCH_DISHES',
     CLEAR_FILTER: 'CLEAR_FILTER',
+    DISH_ERROR: 'DISH_ERROR',
   },
   auth: {
     SET_LOADING: 'SET_LOADING',

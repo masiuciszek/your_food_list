@@ -14,11 +14,15 @@ const StyledDishes = styled.div`
 
 `;
 const Dishes: React.FC<Props> = () => {
-  const { dishes,flirtedDishes } = React.useContext(DishContext);
+  const { dishes, flirtedDishes, getDishes } = React.useContext(DishContext);
+
+  React.useEffect(() => {
+    getDishes();
+  }, []);
+
   if (dishes && dishes.length === 0) {
     return <h4 style={{ margin: '3rem 0', fontSize: '2.4rem' }}>Please Add A Dish</h4>;
   }
-
 
 
   return (

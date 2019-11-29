@@ -9,6 +9,8 @@ export default (state: IStateDishes, action: IActionType) => {
     case contextActions.dishes.GET_DISHES:
       return {
         ...state,
+        dishes: payload,
+        loading: false,
       };
     case contextActions.dishes.ADD_DISH:
       return {
@@ -33,19 +35,25 @@ export default (state: IStateDishes, action: IActionType) => {
         dishes: state.dishes.map((dish) => (dish.id === payload.id ? payload : dish)),
         loading: false,
       };
-      case contextActions.dishes.SEARCH_DISHES:
-        return{
-          ...state,
-          flirtedDishes: state.dishes.filter(dish => {
-            const text = new RegExp(`${payload}`, 'gi');
-            return dish.name.match(text) || dish.country.match(text)
-          })
-        }
-      case contextActions.dishes.CLEAR_FILTER:
-        return{
-          ...state,
-          flirtedDishes: null
-        }
+    case contextActions.dishes.SEARCH_DISHES:
+      return {
+        ...state,
+        flirtedDishes: state.dishes.filter((dish) => {
+          const text = new RegExp(`${payload}`, 'gi');
+          return dish.name.match(text) || dish.country.match(text);
+        }),
+      };
+    case contextActions.dishes.CLEAR_FILTER:
+      return {
+        ...state,
+        flirtedDishes: null,
+      };
+    case contextActions.dishes.DISH_ERROR:
+      return {
+        ...state,
+        loading: false,
+        error: payload,
+      };
 
     default:
       return state;

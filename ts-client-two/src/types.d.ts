@@ -22,7 +22,7 @@ export type IStateDishes = {
   updateDish: any;
   searchDish: any;
   clearFilter: () => void;
-
+  getDishes: () => void;
 }
 
 type IStateAuth = {
@@ -113,7 +113,7 @@ export interface DefaultActionsTypes {
     UPDATE_DISH: string;
     SEARCH_DISHES: string;
     CLEAR_FILTER: string;
-
+    DISH_ERROR: string;
   };
   auth: {
     SET_LOADING: string;
