@@ -10,30 +10,29 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import AuthProvider from './context/auth/auth.state';
 import setAuthToken from './utils/setAuthToken';
+import Profile from './components/auth/Profile';
 
-if(localStorage.token){
-  setAuthToken(localStorage.token)
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
 }
 
-const App: React.FC = () => {
-
-  return (
-    <AuthProvider>
+const App: React.FC = () => (
+  <AuthProvider>
     <DishProvider>
-    <Layout>
-    <AppWrapper>
-    <Switch>
-    <Route exact path="/" component={HomePage} />
-    <Route exact path="/info" component={Info} />
-    <Route exact path="/about" component={About} />
-    <Route exact path="/login" component={Login} />
-    <Route exact path="/register" component={Register} />
-    </Switch>
-    </AppWrapper>
-    </Layout>
+      <Layout>
+        <AppWrapper>
+          <Switch>
+            <Route exact path="/" component={HomePage} />
+            <Route exact path="/info" component={Info} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch>
+        </AppWrapper>
+      </Layout>
     </DishProvider>
-    </AuthProvider>
-  );
-};
+  </AuthProvider>
+);
 
 export default App;
