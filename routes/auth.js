@@ -139,22 +139,8 @@ router.delete('/', authMiddleware, async (req, res) => {
 router.post('/logout', authMiddleware, async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select('-password');
-    console.log(Object.assign(user.tokens));
     user.tokens = [];
     await user.save();
-    res.send('logged out');
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-  }
-});
-
-router.post('/logout/all', authMiddleware, async (req, res) => {
-  try {
-    req.user.tokens = req.user.tokens.filter(
-      token => token.token !== req.token
-    );
-    await req.user.save();
     res.send('logged out');
   } catch (err) {
     console.error(err.message);
