@@ -1,12 +1,16 @@
 import * as React from 'react';
 import styled from 'styled-components';
+import { RouteComponentProps, withRouter, Redirect } from 'react-router-dom';
 import { StyledInput, StyledForm, FormGroup } from '../dishes/DishForm';
 import { authContext } from '../../context/auth/auth.state';
 import BtnPrimary from '../styled/Button';
 
 interface Props {
-
+  history: React.ReactNode;
 }
+
+
+type RegisterProp = RouteComponentProps
 
 export const StyledRegister = styled.div`
   padding: 1rem;
@@ -25,8 +29,8 @@ export const StyledRegister = styled.div`
 `;
 
 
-const Register: React.FC<Props> = () => {
-  const { register } = React.useContext(authContext);
+const Register: React.FC<RegisterProp> = ({ history }) => {
+  const { register, isAuth, loadUser } = React.useContext(authContext);
 
   const [formData, setFormData] = React.useState({
     firstName: '',
@@ -39,6 +43,17 @@ const Register: React.FC<Props> = () => {
   const {
     firstName, lastName, email, password, password2,
   } = formData;
+
+
+  const goHome = () => history.push('/');
+
+  console.log(isAuth);
+  React.useEffect(() => {
+    loadUser();
+    if (isAuth) {
+      goHome();
+    }
+  }, [isAuth]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -80,4 +95,4 @@ const Register: React.FC<Props> = () => {
     </StyledRegister>
   );
 };
-export default Register;
+export default withRouter(Register);

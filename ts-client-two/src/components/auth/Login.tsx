@@ -9,7 +9,7 @@ import BtnPrimary from '../styled/Button';
 interface P {
   history: React.ReactNode;
 }
-type SomeComponentProps = RouteComponentProps;
+type LoginProp = RouteComponentProps;
 
 
 const StyledLogin = styled.div`
@@ -37,7 +37,7 @@ h1{
   }
 `;
 
-const Login: React.FC<SomeComponentProps> = ({ history }) => {
+const Login: React.FC<LoginProp> = ({ history }) => {
   const {
     login, isAuth, loading, loadUser,
   } = React.useContext(authContext);
@@ -48,12 +48,16 @@ const Login: React.FC<SomeComponentProps> = ({ history }) => {
 
   const { email, password } = formData;
 
+
+  const goHome = () => history.push('/');
+
   React.useEffect(() => {
     loadUser();
+
     if (isAuth) {
-      return history.push('/');
+      goHome();
     }
-  }, []);
+  }, [isAuth]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
