@@ -62,9 +62,7 @@ const Register: React.FC<RegisterProp> = ({ history }) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     if (password !== password2 || firstName === ''
-    || lastName === '' || email === '' || !firstName.match(/[a-z]+/gi)
-     || !lastName.match(/[a-z]+/gi)
-      || !password.match(/[a-z]+[0-9a-zA-Z]{6,}/)) {
+    || lastName === '' || email === '') {
       alert('please enter the fields');
     } else {
       register(formData);

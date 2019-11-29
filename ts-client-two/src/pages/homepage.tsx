@@ -30,25 +30,25 @@ const StyledGrid = styled.div`
 `;
 
 const HomePage: React.FC<Props> = () => {
-  const{ loadUser } = React.useContext(authContext)
+  const { loadUser } = React.useContext(authContext);
 
   React.useEffect(() => {
-    loadUser()
-  },[])
-return (
-  <>
-    <h1 style={{
-      textAlign: 'left', margin: '1rem 0', borderBottom: '2px solid #333', width: '15rem',
-    }}
-    >
+    loadUser();
+  }, []);
+  return (
+    <>
+      <h1 style={{
+        textAlign: 'left', margin: '1rem 0', borderBottom: '2px solid #333', width: '15rem',
+      }}
+      >
     Add A Dish
-    </h1>
-    <Search />
-    <StyledGrid>
-      <DishForm />
-      <Dishes />
-    </StyledGrid>
-  </>
-);
-  }
+      </h1>
+      <Search />
+      <StyledGrid>
+        <DishForm />
+        <Dishes />
+      </StyledGrid>
+    </>
+  );
+};
 export default HomePage;
