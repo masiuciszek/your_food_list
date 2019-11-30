@@ -1,14 +1,14 @@
 {
   "version": "1.0.0",
-  "name": "Air Horner",
+  "name": "Food for you",
   "launch_path": "/index.html",
   "description": "An Air Horn",
   "icons": {
     "128": "/images/touch/icon-128x128.png"
   },
   "developer": {
-    "name": "Paul Kinlan",
-    "url": "http://paul.kinlan.me"
+    "name": "Marcell",
+    "url": "https://marcellable.com"
   },
   "installs_allowed_from": [
     "*"
