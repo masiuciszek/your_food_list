@@ -7,7 +7,7 @@ const dishSchema = Schema({
   // Relation
   user: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: 'User',
   },
   name: {
     type: String,

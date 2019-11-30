@@ -5,10 +5,10 @@ const router = express.Router();
 const { check, validationResult } = require('express-validator');
 
 const multer = require('multer');
+
 const Dish = require('../models/Dish');
 const authMiddleware = require('../middleware/authMiddleware');
 const User = require('../models/User');
-
 /**
  * @route GET /dishes
  * @desc Get all user dishes
@@ -16,8 +16,9 @@ const User = require('../models/User');
  */
 router.get('/', authMiddleware, async (req, res) => {
   try {
-    const dishes = await Dish.find({ user: req.user.id }).sort({ date: -1 });
-
+    const dishes = await Dish.find({ user: req.user.id })
+      .sort({ date: -1 })
+      .populate('user', '-password');
     if (!dishes) return res.status(401).json({ msg: 'Authentication denied' });
     res.json(dishes);
   } catch (err) {
@@ -42,7 +43,7 @@ router.post(
       check('country', 'country is required ')
         .not()
         .isEmpty(),
-      check('description', 'max 255 charchters').isLength({ max: 255 }),
+      check('description', 'max 255 characters').isLength({ max: 255 }),
     ],
   ],
   async (req, res) => {
