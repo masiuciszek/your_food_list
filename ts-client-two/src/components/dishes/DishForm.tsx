@@ -9,7 +9,9 @@ interface Props {
 
 
 const DishForm: React.FC<Props> = () => {
-  const { addDish, current, updateDish } = React.useContext(DishContext);
+  const {
+ addDish, current, updateDish , clearCurrent 
+} = React.useContext(DishContext);
 
   const [formData, setFormData] = React.useState({
     name: '',
@@ -42,11 +44,17 @@ const DishForm: React.FC<Props> = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    if (current) {
-      updateDish(formData);
-    } else {
+    if (current === null) {
       addDish(formData);
+    } else {
+      updateDish(formData);
     }
+    setFormData({
+      name: '',
+      type: 'main',
+      country: '',
+      description: '',
+    });
   };
   return (
     <>
@@ -73,7 +81,9 @@ const DishForm: React.FC<Props> = () => {
           <BtnPrimary>
             {current ? 'Update' : 'Add new Dish'}
           </BtnPrimary>
-
+          {
+            country && <BtnPrimary style={{ margin: '0 1rem' }} onClick={() => clearCurrent()}>Regret</BtnPrimary>
+          }
         </FormGroup>
       </StyledForm>
     </>

@@ -55,7 +55,11 @@ export default (state: IStateDishes, action: IActionType) => {
         loading: false,
         error: payload,
       };
-
+    case contextActions.dishes.CLEAR_CURRENT:
+      return {
+        ...state,
+        current: null,
+      };
     default:
       return state;
   }

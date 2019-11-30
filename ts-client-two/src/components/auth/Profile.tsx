@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { authContext } from '../../context/auth/auth.state';
 import BtnPrimary from '../styled/Button';
+import useToggle from '../../hooks/useToggle';
+import ProfileForm from './ProfileForm';
 
 interface Props {
   history: React.ReactNode;
@@ -27,6 +29,7 @@ export const StyledProfile = styled.div`
     justify-content: flex-end;
     button {
       margin: 0 .5rem;
+      width: 13rem;
     }
   }
   p{
@@ -38,42 +41,52 @@ const Profile: React.FC<ProfileProp> = ({ history }) => {
   const {
     user, loading, deleteProfile, loadUser,
   } = React.useContext(authContext);
+
+  const [edit, toggleEdit] = useToggle(false);
+
   React.useEffect(() => {
     loadUser();
   }, []);
 
   return (
-    <StyledProfile>
-      <h1>
+    <>
+      <StyledProfile>
+        <h1>
         Hello
-        {' '}
-        <span>
           {' '}
-          {!loading && user && user.firstName}
-        </span>
-      </h1>
-      <div className="body">
-        <h3>
+          <span>
+            {' '}
+            {!loading && user && user.firstName}
+          </span>
+        </h1>
+        <div className="body">
+          <h3>
           First Name:
-          {' '}
-          {!loading && user && user.firstName}
-        </h3>
-        <h3>
+            {' '}
+            {!loading && user && user.firstName}
+          </h3>
+          <h3>
         Last Name:
-          {' '}
-          {!loading && user && user.lastName}
-        </h3>
-        <h3>
+            {' '}
+            {!loading && user && user.lastName}
+          </h3>
+          <h3>
         Email:
-          {' '}
-          {!loading && user && user.email}
-        </h3>
+            {' '}
+            {!loading && user && user.email}
+          </h3>
 
-      </div>
-      <div className="btn-group">
-        <BtnPrimary onClick={() => deleteProfile()}>Delete Profile</BtnPrimary>
-      </div>
-    </StyledProfile>
+        </div>
+        <div className="btn-group">
+          {!edit && <BtnPrimary onClick={() => deleteProfile()}>Delete Profile</BtnPrimary>}
+
+
+        </div>
+      </StyledProfile>
+      {edit && <ProfileForm /> }
+    </>
   );
 };
+
+// <BtnPrimary onClick={toggleEdit}>{edit ? 'Done ' : 'Edit'}</BtnPrimary>
 export default withRouter(Profile);

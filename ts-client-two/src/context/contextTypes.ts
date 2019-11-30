@@ -11,6 +11,7 @@ const contextActions: DefaultActionsTypes = {
     SEARCH_DISHES: 'SEARCH_DISHES',
     CLEAR_FILTER: 'CLEAR_FILTER',
     DISH_ERROR: 'DISH_ERROR',
+    CLEAR_CURRENT: 'CLEAR_CURRENT',
   },
   auth: {
     SET_LOADING: 'SET_LOADING',

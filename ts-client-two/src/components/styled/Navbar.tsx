@@ -7,19 +7,22 @@ import { fadeDown } from '../../utils/animation';
 import useToggle from '../../hooks/useToggle';
 import { authContext } from '../../context/auth/auth.state';
 
-interface Props {
 
+interface P {
 }
+
+
 interface NavBarProps {
   show: boolean;
 }
 
 
-const Navbar: React.FC<Props> = () => {
+const Navbar: React.FC<P> = () => {
   const {
     isAuth, user, loading, serverLogout,
   } = React.useContext(authContext);
   const [show, toggleShow] = useToggle(false);
+
 
   const handleLogout = () => {
     serverLogout();

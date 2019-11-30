@@ -23,6 +23,7 @@ export type IStateDishes = {
   searchDish: any;
   clearFilter: () => void;
   getDishes: () => void;
+  clearCurrent: () => void;
 }
 
 type IStateAuth = {
@@ -46,6 +47,7 @@ export type Dish = {
   country: string;
   description: string;
   type: string;
+  user: User;
 }
 
 export type User = {
@@ -111,6 +113,7 @@ export interface DefaultActionsTypes {
     GET_DISHES: string;
     DELETE_DISH: string;
     SET_CURRENT: string;
+    CLEAR_CURRENT: string;
     ADD_DISH: string;
     UPDATE_DISH: string;
     SEARCH_DISHES: string;

@@ -104,7 +104,7 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
     }
   };
 
-  // TODO: Try the logout endpoint
+
   const serverLogout = async () => {
     try {
       await axios.post('/auth/logout');

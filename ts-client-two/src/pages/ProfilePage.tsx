@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import Profile from '../components/auth/Profile';

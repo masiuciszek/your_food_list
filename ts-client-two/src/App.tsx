@@ -4,6 +4,8 @@ import Layout from './components/Layout';
 import AppWrapper from './components/styled/AppWrapper';
 import DishProvider from './context/dishes/dish.state';
 import HomePage from './pages/homepage';
+import ErrorPage from './pages/errorPage';
+
 import Info from './pages/info';
 import About from './pages/about';
 import Login from './components/auth/Login';
@@ -29,6 +31,7 @@ const App: React.FC = () => (
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
             <PrivateRouting exact path="/profile" component={Profile} />
+            <Route exact component={ErrorPage} />
           </Switch>
         </AppWrapper>
       </Layout>

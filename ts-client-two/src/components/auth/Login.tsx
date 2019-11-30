@@ -39,7 +39,7 @@ h1{
 
 const Login: React.FC<LoginProp> = ({ history }) => {
   const {
-    login, isAuth, loading, loadUser,
+    login, isAuth, loadUser,
   } = React.useContext(authContext);
   const [formData, setFormData] = React.useState({
     email: '',

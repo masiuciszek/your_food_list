@@ -2,7 +2,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import * as React from 'react';
-import uuid from 'uuid/v4';
 
 import axios from 'axios';
 import contextActions from '../contextTypes';
@@ -113,6 +112,11 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
     });
   };
 
+  const clearCurrent = () => {
+    dispatch({
+      type: contextActions.dishes.CLEAR_CURRENT,
+    });
+  };
 
   return (
     <DishContext.Provider value={{
@@ -128,6 +132,7 @@ const DishProvider: React.FC<Props> = ({ children }): JSX.Element => {
       searchDish,
       clearFilter,
       getDishes,
+      clearCurrent,
     }}
     >
       {children}

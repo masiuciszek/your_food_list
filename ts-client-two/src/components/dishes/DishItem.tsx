@@ -16,12 +16,12 @@ interface LabelProps {
 
 
 const DishItem: React.FC<Props> = ({ dish }) => {
-  const { deleteDish, setCurrent } = React.useContext(DishContext);
+  const { deleteDish, setCurrent, loading } = React.useContext(DishContext);
   const {
-    _id, name, description, country, type,
+    _id, name, description, country, type, user,
   } = dish;
 
-
+  console.log(user);
   const handleDelete = () => {
     deleteDish(_id);
   };
@@ -30,21 +30,31 @@ const DishItem: React.FC<Props> = ({ dish }) => {
     <StyledDish>
       <div className="head">
         <h3>
-          Dish Name:
+        Eaten by :
           {' '}
-          {name}
+          {user.firstName}
+          {'   '}
+          {user.lastName}
         </h3>
+
         <Label type={type}><small>{type}</small></Label>
       </div>
       <h3>
-        Country: 
-{' '}
-{country}
+      Dish Name:
+        {' '}
+        {name}
+      </h3>
+      <h3>
+        Country:
+        {' '}
+        {country}
         {' '}
         {country.toLowerCase() === 'italy' && '🇮🇹'
          || country.toLowerCase() === 'spain' && '🇪🇸'
          || country.toLowerCase() === 'england' && '🏴󠁧󠁢󠁥󠁮󠁧󠁿'
          || country.toLowerCase() === 'america' && '🇺🇸'
+         || country.toLowerCase() === 'sweden' && '🇸🇪'
+         || country.toLowerCase() === 'kazakhstan' && '🇰🇿'
          || 'λ' }
       </h3>
 
@@ -83,7 +93,7 @@ const StyledDish = styled.div`
 
 const Label = styled.span<LabelProps>`
   padding: .5rem;
-  /* TODO:delete */
+
   border: 2px solid #fff;
   margin-left: auto;
   border-radius: ${({ theme }) => theme.borderRadius};
