@@ -1,7 +1,7 @@
 const CACHE_NAME = 'food-for-you';
 const urlsToCache = [
   '/',
-  '/login',
+  '/index.html',
 ];
 
 // Install a service worker
