@@ -32,9 +32,9 @@ const DishItem: React.FC<Props> = ({ dish }) => {
         <h3>
         Eaten by :
           {' '}
-          {user.firstName}
+          {!loading && user && user.firstName}
           {'   '}
-          {user.lastName}
+          {!loading && user && user.lastName}
         </h3>
 
         <Label type={type}><small>{type}</small></Label>
