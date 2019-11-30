@@ -97,6 +97,7 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
       try {
         await axios.delete('/auth');
         dispatch({ type: contextActions.auth.REMOVE_USER });
+        loadUser();
       } catch (err) {
         dispatch({ type: contextActions.auth.AUTH_ERROR, payload: err.message });
       }
@@ -110,6 +111,7 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
       dispatch({
         type: contextActions.auth.SERVER_LOGOUT,
       });
+      loadUser();
     } catch (err) {
       dispatch({ type: contextActions.auth.SERVER_ERROR, payload: err.message });
     }

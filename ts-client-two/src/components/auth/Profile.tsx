@@ -36,17 +36,11 @@ export const StyledProfile = styled.div`
 
 const Profile: React.FC<ProfileProp> = ({ history }) => {
   const {
-    isAuth, user, loading, loadUser, deleteProfile,
+    user, loading, deleteProfile, loadUser,
   } = React.useContext(authContext);
-
-
   React.useEffect(() => {
     loadUser();
-    if (!isAuth) {
-      history.push('/');
-    }
   }, []);
-
 
   return (
     <StyledProfile>
@@ -74,6 +68,7 @@ const Profile: React.FC<ProfileProp> = ({ history }) => {
           {' '}
           {!loading && user && user.email}
         </h3>
+
       </div>
       <div className="btn-group">
         <BtnPrimary onClick={() => deleteProfile()}>Delete Profile</BtnPrimary>
