@@ -1,8 +1,7 @@
 {
-  "short_name": "Tasty you app",
+  "short_name": "Tasty you",
   "name": "Tasty You",
-  "icons": [
-    {
+  "icons": [{
       "src": "snogubbe.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/snogubbe.png"
