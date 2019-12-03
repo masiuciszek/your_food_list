@@ -1,19 +1,15 @@
 {
   "short_name": "Tasty you",
   "name": "Tasty You",
-  "icons": [{
+  "icons": [
+    {
       "src": "snogubbe.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/snogubbe.png"
+      "type": "image/carrot.png"
     },
     {
-      "src": "snogubbe.svg",
-      "type": "image/snogubbe.svg",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/logo512.png",
+      "src": "carrot.png",
+      "type": "image/carrot.png",
       "sizes": "512x512"
     }
   ],
