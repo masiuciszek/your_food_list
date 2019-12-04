@@ -2,7 +2,6 @@ const CACHE_NAME = 'food-for-you';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/serverless.html',
 ];
 
 // Install a service worker
