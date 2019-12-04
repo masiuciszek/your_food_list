@@ -1,0 +1,12 @@
+{
+  "minify": true,
+  "options": [
+    "setClasses"
+  ],
+  "feature-detects": [
+    "test/gamepad",
+    "test/geolocation",
+    "test/svg",
+    "test/webgl"
+  ]
+}
