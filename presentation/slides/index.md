@@ -49,10 +49,11 @@
 
 
 ### Things I learned
-1. Creating a MERN application <!--.element: class="fragment" data-fragment-index="1"-->
+1. creating a MERN application <!--.element: class="fragment" data-fragment-index="1"-->
 2. working with Typescript <!--.element: class="fragment" data-fragment-index="2"-->
 3. Searching deeply for info <!--.element: class="fragment" data-fragment-index="3"-->
-4. Working with Mongo DB <!--.element: class="fragment" data-fragment-index="4"-->
+4. working with Mongo DB <!--.element: class="fragment" data-fragment-index="4"-->
+4. custom react hooks  <!--.element: class="fragment" data-fragment-index="5"-->
 
 
 ### Code Examples 🤟🏻 λ
@@ -172,9 +173,33 @@ const AuthProvider: React.FC<Props> = ({ children }): JSX.Element => {
 ```
 
 
+
+```javascript
+import { useState } from 'react';
+/**
+ * A custom hook for toggling boolean states.
+ * @param {boolean} initialState - The state to initialise the hook with.
+ * @returns Tuple containing the current state and a toggling function
+ */
+
+export default (initialState = false): [boolean, () => void] => {
+  const [state, setState] = useState<boolean>(initialState);
+
+  const toggle = (): void => {
+    setState(!state);
+  };
+
+  return [state, toggle];
+};
+```
+
+
+
 ### If I had a time machine
 - Planing my work even better <!--.element: class="fragment" data-fragment-index="1"-->
 - making the application event more complex <!--.element: class="fragment" data-fragment-index="2"-->
+- Pagination <!--.element: class="fragment" data-fragment-index="3"-->
+
 
 
 ### How could I develop the app
